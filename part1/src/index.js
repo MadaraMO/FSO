@@ -52,7 +52,8 @@ const course = 'Half Stack application development'
   const Total = () => {
     return (
       <div>
-        <p>Number of exercises {parts[0].exercises} + {parts[1].exercises} + {parts[2].exercises}</p>
+        <p>Number of exercises {parts[0].exercises + parts[1].exercises + parts[2].exercises}
+          </p>
       </div>
     )
   }
@@ -60,9 +61,9 @@ const course = 'Half Stack application development'
 const App = () => {
   return (
     <div>
-      <Header course={course}/>
-      <Content part={parts}/>
-      <Total exercises={parts.exercises}/>
+      <Header/>
+      <Content />
+      <Total />
     </div>
   )
 }

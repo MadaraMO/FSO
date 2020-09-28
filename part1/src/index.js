@@ -40,15 +40,30 @@ const Neutral = ({counter}) => (
   </>
 )
 
+const All = ({counter}) => (
+  <>
+ <p>All: {counter}</p>
+  <Display />
+  </>
+)
+
+const Average = ({counter}) => (
+  <>
+ <p>Average: {counter}</p>
+  <Display />
+  </>
+)
+
+const Positive = ({counter}) => (
+  <>
+ <p>Positive: {counter}</p>
+  <Display />
+  </>
+)
+
 
 // const Statistics = ({ statistics }) => (
 //   <>
-//     <h2>{statistics}</h2>
-//     {/*
-   
-//    <p>All:{count}</p>
-//    <p>Average: {count}</p>
-//    <p>Positive: {count}</p> */}
 //   </>
 // )
 
@@ -80,6 +95,9 @@ const App = () => {
       <Good counter={good} />
       <Bad counter={bad} />
       <Neutral counter={neutral} />
+      <All />
+      <Average />
+      <Positive />
     </>
   )
 }

@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 
-const Header = ({ feedback }) => (
+const Headline = ({ title }) => (
   <>
-    <h1>{feedback}</h1>
+    <h2>{title}</h2>
   </>
 )
 
@@ -41,16 +41,16 @@ const Neutral = ({counter}) => (
 )
 
 
-const Statistics = ({ statistics }) => (
-  <>
-    <h2>{statistics}</h2>
-    {/*
+// const Statistics = ({ statistics }) => (
+//   <>
+//     <h2>{statistics}</h2>
+//     {/*
    
-   <p>All:{count}</p>
-   <p>Average: {count}</p>
-   <p>Positive: {count}</p> */}
-  </>
-)
+//    <p>All:{count}</p>
+//    <p>Average: {count}</p>
+//    <p>Positive: {count}</p> */}
+//   </>
+// )
 
 
 
@@ -72,11 +72,11 @@ const App = () => {
 
   return (
     <>
-      <Header feedback={feedback} />
+      <Headline title={feedback} />
       <Button handleClick={increaseByOne} text='good' />
       <Button handleClick={decreaseByOne} text='bad' />
       <Button handleClick={doNothing} text='neutral' />
-      <Statistics statistics={statistics} />
+      <Headline title={statistics} />
       <Good counter={good} />
       <Bad counter={bad} />
       <Neutral counter={neutral} />

@@ -14,28 +14,45 @@ const Button = ({ handleClick, text }) => (
   </>
 )
 
-
-const Good = ({good, counter}) => (
+const Statistic = ({text, value}) => (
   <>
-    <p>Good: {good} {counter}</p>
+  <p>{text} {value}</p>
   </>
 )
 
-const Bad = ({bad, counter}) => (
+const Statistics = ({good, bad, neutral}) => (
   <>
-  <p>Bad: {bad} {counter}</p>
+  <Statistic text='Good:' value={good}/>
+  <Statistic text='Bad:' value={bad}/>
+  <Statistic text='Neutral:' value={neutral}/>
+  <Statistic text='All:'/>
+  <Statistic text='Average:'/>
+  <Statistic text='Positive:'/>
   </>
 )
 
-const Neutral = ({neutral, counter}) => (
-  <>
- <p>Neutral: {neutral} {counter}</p>
-  </>
-)
-
-// const All = ({count, counter}) => (
+// const Good = ({good, counter}) => (
 //   <>
-//  <p>All: {count} {counter}</p>
+//     <p>Good: {good} {counter}</p>
+//   </>
+// )
+
+// const Bad = ({bad, counter}) => (
+//   <>
+//   <p>Bad: {bad} {counter}</p>
+//   </>
+// )
+
+// const Neutral = ({neutral, counter}) => (
+//   <>
+//  <p>Neutral: {neutral} {counter}</p>
+//   </>
+// )
+
+// const All = ({countAll, counter}) => (
+ 
+//   <>
+//  <p>All: {countAll} {counter}</p>
 //   </>
 // )
 
@@ -55,8 +72,13 @@ const Neutral = ({neutral, counter}) => (
 
 
 const App = () => {
+  
   const feedback = 'Give feedback'
   const statistics = 'Statistics'
+
+
+  // const [countAll, setCount]  = useState(0)
+  // const increaseAll = () => setCount(countAll + 1)
 
 
   const [good, setGood] = useState(0)
@@ -69,24 +91,24 @@ const App = () => {
   const increaseNeutral = () => setNeutral(neutral + 1)
 
 
-  // const [count, setCount]  = useState(0)
-  // const countAll = () => setCount(count + 1)
+ 
 
 
 
 
 
   return (
+    
     <>
       <Headline title={feedback} />
-      <Button handleClick={increaseGood} text='good' />
-      <Button handleClick={increaseBad} text='bad' />
-      <Button handleClick={increaseNeutral} text='neutral' />
+      <Button handleClick={increaseGood} text='Good' />
+      <Button handleClick={increaseBad} text='Bad' />
+      <Button handleClick={increaseNeutral} text='Neutral' />
       <Headline title={statistics} />
-      <Good counter={good} />
-      <Bad counter={bad} />
+      <Statistics good={good} bad={bad} neutral={neutral}/>
+      {/* <Bad counter={bad} />
       <Neutral counter={neutral} />
-      {/* <All counter={countAll}/> */}
+      <All counter={countAll} /> */}
       {/* <Average />
       <Positive />  */}
     </>

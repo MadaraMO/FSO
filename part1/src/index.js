@@ -14,52 +14,42 @@ const Button = ({ handleClick, text }) => (
   </>
 )
 
-const Display = ({ counter }) => (
+
+const Good = ({good, counter}) => (
   <>
-    {counter}
-  </>
-)
-const Good = ({counter}) => (
-  <>
-    <p>Good: {counter}</p>
-    <Display />
+    <p>Good: {good} {counter}</p>
   </>
 )
 
-const Bad = ({counter}) => (
+const Bad = ({bad, counter}) => (
   <>
-  <p>Bad: {counter}</p>
-  <Display />
+  <p>Bad: {bad} {counter}</p>
   </>
 )
 
-const Neutral = ({counter}) => (
+const Neutral = ({neutral, counter}) => (
   <>
- <p>Neutral: {counter}</p>
-  <Display />
+ <p>Neutral: {neutral} {counter}</p>
   </>
 )
 
-const All = ({counter}) => (
-  <>
- <p>All: {counter}</p>
-  <Display />
-  </>
-)
+// const All = ({all, counter}) => (
+//   <>
+//  <p>All: {all} {counter}</p>
+//   </>
+// )
 
-const Average = ({counter}) => (
-  <>
- <p>Average: {counter}</p>
-  <Display />
-  </>
-)
+// const Average = ({average, counter}) => (
+//   <>
+//  <p>Average: {average} {counter}</p>
+//   </>
+// )
 
-const Positive = ({counter}) => (
-  <>
- <p>Positive: {counter}</p>
-  <Display />
-  </>
-)
+// const Positive = ({positive, counter}) => (
+//   <>
+//  <p>Positive: {positive} {counter}</p>
+//   </>
+// )
 
 
 // const Statistics = ({ statistics }) => (
@@ -72,32 +62,40 @@ const Positive = ({counter}) => (
 const App = () => {
   const feedback = 'Give feedback'
   const statistics = 'Statistics'
+
   const [count, setCount]  = useState(0)
-  const increaseByOne = () => setCount(count + 1)
+  const countAll = () => setCount(count + 1)
 
-  // const [good, setGood] = useState(0)
-  // const [neutral, setNeutral] = useState(0)
-  // const [bad, setBad] = useState(0)
+  const [good, setGood] = useState(0)
+  const increaseGood = () => setGood(good + 1)
 
-  // const decreaseByOne = () => setBad(count)
-  // const doNothing = () => setNeutral(count)
 
+  const [bad, setBad] = useState(0)
+  const increaseBad = () => setBad(bad + 1)
+
+  const [neutral, setNeutral] = useState(0)
+  const increaseNeutral = () => setNeutral(neutral + 1)
+
+// console.log(increaseGood)
+// console.log(increaseBad)
+// console.log(increaseNeutral)
+// console.log(countAll)
 
 
 
   return (
     <>
       <Headline title={feedback} />
-      <Button handleClick={increaseByOne} text='good' />
-      <Button handleClick={increaseByOne} text='bad' />
-      <Button handleClick={increaseByOne} text='neutral' />
+      <Button handleClick={increaseGood} text='good' />
+      <Button handleClick={increaseBad} text='bad' />
+      <Button handleClick={increaseNeutral} text='neutral' />
       <Headline title={statistics} />
-      <Good counter={count} />
-      <Bad counter={count} />
-      <Neutral counter={count} />
-      <All />
+      <Good counter={good} />
+      <Bad counter={bad} />
+      <Neutral counter={neutral} />
+      {/* <All counter={all}/>
       <Average />
-      <Positive />
+      <Positive /> */}
     </>
   )
 }

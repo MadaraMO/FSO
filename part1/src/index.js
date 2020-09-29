@@ -21,9 +21,16 @@ const Statistic = ({text, value}) => (
 )
 
 const Statistics = ({good, bad, neutral}) => {
-   const total = good + bad + neutral
+  
+  const total = good + bad + neutral
+  if(total === 0) {
+    return (
+      <p>No feedback given</p>
+    )
+  }
+   
    const average = (good - bad) / total
-   const positive = (good / total) * 100 + '%'
+   const positive = (good / total) * 100 + ' %'
 
    return (
        <>
@@ -38,46 +45,6 @@ const Statistics = ({good, bad, neutral}) => {
 
 }
  
-
-
-// const Good = ({good, counter}) => (
-//   <>
-//     <p>Good: {good} {counter}</p>
-//   </>
-// )
-
-// const Bad = ({bad, counter}) => (
-//   <>
-//   <p>Bad: {bad} {counter}</p>
-//   </>
-// )
-
-// const Neutral = ({neutral, counter}) => (
-//   <>
-//  <p>Neutral: {neutral} {counter}</p>
-//   </>
-// )
-
-// const All = ({countAll, counter}) => (
- 
-//   <>
-//  <p>All: {countAll} {counter}</p>
-//   </>
-// )
-
-// const Average = ({average, counter}) => (
-//   <>
-//  <p>Average: {average} {counter}</p>
-//   </>
-// )
-
-// const Positive = ({positive, counter}) => (
-//   <>
-//  <p>Positive: {positive} {counter}</p>
-//   </>
-// )
-
-
 
 
 const App = () => {
@@ -96,12 +63,6 @@ const App = () => {
   const increaseNeutral = () => setNeutral(neutral + 1)
 
 
- 
-
-
-
-
-
   return (
     
     <>
@@ -111,11 +72,6 @@ const App = () => {
       <Button handleClick={increaseNeutral} text='Neutral' />
       <Headline title={statistics} />
       <Statistics good={good} bad={bad} neutral={neutral}/>
-      {/* <Bad counter={bad} />
-      <Neutral counter={neutral} />
-      <All counter={countAll} /> */}
-      {/* <Average />
-      <Positive />  */}
     </>
   )
 }

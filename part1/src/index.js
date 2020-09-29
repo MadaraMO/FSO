@@ -33,9 +33,9 @@ const Neutral = ({neutral, counter}) => (
   </>
 )
 
-// const All = ({all, counter}) => (
+// const All = ({count, counter}) => (
 //   <>
-//  <p>All: {all} {counter}</p>
+//  <p>All: {count} {counter}</p>
 //   </>
 // )
 
@@ -52,23 +52,15 @@ const Neutral = ({neutral, counter}) => (
 // )
 
 
-// const Statistics = ({ statistics }) => (
-//   <>
-//   </>
-// )
-
 
 
 const App = () => {
   const feedback = 'Give feedback'
   const statistics = 'Statistics'
 
-  const [count, setCount]  = useState(0)
-  const countAll = () => setCount(count + 1)
 
   const [good, setGood] = useState(0)
   const increaseGood = () => setGood(good + 1)
-
 
   const [bad, setBad] = useState(0)
   const increaseBad = () => setBad(bad + 1)
@@ -76,10 +68,11 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const increaseNeutral = () => setNeutral(neutral + 1)
 
-// console.log(increaseGood)
-// console.log(increaseBad)
-// console.log(increaseNeutral)
-// console.log(countAll)
+
+  // const [count, setCount]  = useState(0)
+  // const countAll = () => setCount(count + 1)
+
+
 
 
 
@@ -93,9 +86,9 @@ const App = () => {
       <Good counter={good} />
       <Bad counter={bad} />
       <Neutral counter={neutral} />
-      {/* <All counter={all}/>
-      <Average />
-      <Positive /> */}
+      {/* <All counter={countAll}/> */}
+      {/* <Average />
+      <Positive />  */}
     </>
   )
 }

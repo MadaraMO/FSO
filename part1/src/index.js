@@ -20,16 +20,25 @@ const Statistic = ({text, value}) => (
   </>
 )
 
-const Statistics = ({good, bad, neutral}) => (
-  <>
+const Statistics = ({good, bad, neutral}) => {
+   const total = good + bad + neutral
+   const average = (good - bad) / total
+   const positive = (good / total) * 100 + '%'
+
+   return (
+       <>
   <Statistic text='Good:' value={good}/>
   <Statistic text='Bad:' value={bad}/>
   <Statistic text='Neutral:' value={neutral}/>
-  <Statistic text='All:'/>
-  <Statistic text='Average:'/>
-  <Statistic text='Positive:'/>
+  <Statistic text='All:' value={total}/>
+  <Statistic text='Average:' value={average}/>
+  <Statistic text='Positive:' value={positive}/>
   </>
-)
+   )
+
+}
+ 
+
 
 // const Good = ({good, counter}) => (
 //   <>
@@ -75,10 +84,6 @@ const App = () => {
   
   const feedback = 'Give feedback'
   const statistics = 'Statistics'
-
-
-  // const [countAll, setCount]  = useState(0)
-  // const increaseAll = () => setCount(countAll + 1)
 
 
   const [good, setGood] = useState(0)

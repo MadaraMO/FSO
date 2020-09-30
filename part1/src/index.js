@@ -55,14 +55,17 @@ const App = () => {
   }
 
   const [vote, setVote] = useState(new Uint8Array(anecdotes.length))
-  // new Array(anecdotes.length+1).join('0').split('').map(parseFloat)
-  // Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0)
-  // new Array(anecdotes.length).fill(0)
   const voteForAnecdote = () => {
     const storedVotes = [...vote]
     storedVotes[selected] += 1
     setVote(storedVotes)
+    // console.log('stored vote...' + storedVotes)
   }
+  // console.log('vote...' + vote)
+
+  const mostVoted = Math.max(...vote);
+
+// console.log(mostVoted)
 
   return (
     <>
@@ -72,7 +75,8 @@ const App = () => {
       <Button handleclick={randomAnecdote} text='Next anecdote' />
       <Button handleclick={voteForAnecdote} text='Vote' />
       <Headline title='Anecdote with most votes' />
-      <Winner winner={anecdotes[selected]}/>
+      <Winner winner={mostVoted}/>
+      <Vote votes={mostVoted} />
     </>
   )
 }

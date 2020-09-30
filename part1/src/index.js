@@ -57,7 +57,7 @@ const App = () => {
   return (
     <>
       <Anecdotes anecdotes={anecdotes[selected]} />
-      <Vote votes={vote}/>
+      <Vote votes={storedVotes[selected]}/>
       <Button handleclick={randomAnecdote} text='Next anecdote' />
       <Button handleclick={voteForAnecdote} text='Vote' />
     </>

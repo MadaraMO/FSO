@@ -2,25 +2,31 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 
-const Anecdotes = ({anecdotes}) => (
- <>
- <p>
+const Anecdotes = ({ anecdotes }) => (
+  <>
+    <p>
       {anecdotes}
     </p>
-    </>
+  </>
 )
 
-const Button = ({handleclick, text}) => (
+const Button = ({ handleclick, text }) => (
   <>
-  <button onClick={handleclick}>
-    {text}
-  </button>
+    <button onClick={handleclick}>
+      {text}
+    </button>
+  </>
+)
+
+const Vote = ({votes}) => (
+  <>
+  <p>This anecdote has {votes}</p>
   </>
 )
 
 
 const App = () => {
-  
+
   const anecdotes = [
     'If it hurts, do it more often',
     'Adding manpower to a late software project makes it later!',
@@ -29,22 +35,24 @@ const App = () => {
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
   ]
-  
+
   const [selected, setSelected] = useState(0)
-  
-  console.log(selected)
 
   const randomAnecdote = () => {
     setSelected(
       Math.floor(Math.random() * Math.floor(anecdotes.length))
-      )
+    )
   }
-    
+
+  const [vote, setVote] = useState(0)
+  const voteForAnecdote = () => setVote(vote + 1)
 
   return (
     <>
-    <Anecdotes anecdotes={anecdotes[selected]}/>
-    <Button handleclick={randomAnecdote} text='Next anecdote'/>
+      <Anecdotes anecdotes={anecdotes[selected]} />
+      <Vote votes={vote}/>
+      <Button handleclick={randomAnecdote} text='Next anecdote' />
+      <Button handleclick={voteForAnecdote} text='Vote' />
     </>
   )
 }

@@ -44,8 +44,12 @@ const App = () => {
     )
   }
 
-  const [vote, setVote] = useState(0)
-  const voteForAnecdote = () => setVote(vote + 1)
+  const [vote, setVote] = useState(new Array(anecdotes.length).fill(0))
+  const voteForAnecdote = () => {
+    const storedVotes = [...vote]
+    storedVotes[selected] +=1
+    setVote(storedVotes)
+  }
 
   return (
     <>

@@ -59,14 +59,11 @@ const App = () => {
     const storedVotes = [...vote]
     storedVotes[selected] += 1
     setVote(storedVotes)
-    // console.log('stored vote...' + storedVotes)
-  }
-  // console.log('vote...' + vote)
 
   const mostVoted = Math.max(...vote)
 
-  const bestAnecdote = anecdotes[mostVoted]
-  // console.log(bestAnecdote)
+  const bestAnecdote = anecdotes[vote.indexOf(mostVoted)]
+
 
   return (
     <>

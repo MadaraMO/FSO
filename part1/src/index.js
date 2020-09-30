@@ -29,6 +29,11 @@ const Vote = ({ votes }) => (
   </>
 )
 
+const Winner = ({winner}) => (
+  <>
+    <p> {winner}</p>
+  </>
+)
 
 const App = () => {
 
@@ -67,6 +72,7 @@ const App = () => {
       <Button handleclick={randomAnecdote} text='Next anecdote' />
       <Button handleclick={voteForAnecdote} text='Vote' />
       <Headline title='Anecdote with most votes' />
+      <Winner winner={anecdotes[selected]}/>
     </>
   )
 }

@@ -63,9 +63,10 @@ const App = () => {
   }
   // console.log('vote...' + vote)
 
-  const mostVoted = Math.max(...vote);
+  const mostVoted = Math.max(...vote)
 
-// console.log(mostVoted)
+  const bestAnecdote = anecdotes[mostVoted]
+  // console.log(bestAnecdote)
 
   return (
     <>
@@ -75,7 +76,7 @@ const App = () => {
       <Button handleclick={randomAnecdote} text='Next anecdote' />
       <Button handleclick={voteForAnecdote} text='Vote' />
       <Headline title='Anecdote with most votes' />
-      <Winner winner={mostVoted}/>
+      <Winner winner={bestAnecdote}/>
       <Vote votes={mostVoted} />
     </>
   )

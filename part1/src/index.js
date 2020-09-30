@@ -20,7 +20,7 @@ const Button = ({ handleclick, text }) => (
 
 const Vote = ({votes}) => (
   <>
-  <p>This anecdote has {votes}</p>
+  <p>This anecdote has {votes} votes</p>
   </>
 )
 
@@ -57,7 +57,7 @@ const App = () => {
   return (
     <>
       <Anecdotes anecdotes={anecdotes[selected]} />
-      <Vote votes={storedVotes[selected]}/>
+      <Vote votes={vote[selected]}/>
       <Button handleclick={randomAnecdote} text='Next anecdote' />
       <Button handleclick={voteForAnecdote} text='Vote' />
     </>

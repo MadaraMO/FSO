@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const Headline = ({ title }) => (
+  <>
+    <h2>{title}</h2>
+  </>
+)
 
 const Anecdotes = ({ anecdotes }) => (
   <>
@@ -18,9 +23,9 @@ const Button = ({ handleclick, text }) => (
   </>
 )
 
-const Vote = ({votes}) => (
+const Vote = ({ votes }) => (
   <>
-  <p>This anecdote has {votes} votes</p>
+    <p>This anecdote has {votes} votes</p>
   </>
 )
 
@@ -56,10 +61,12 @@ const App = () => {
 
   return (
     <>
+      <Headline title='Anecdote of the day' />
       <Anecdotes anecdotes={anecdotes[selected]} />
-      <Vote votes={vote[selected]}/>
+      <Vote votes={vote[selected]} />
       <Button handleclick={randomAnecdote} text='Next anecdote' />
       <Button handleclick={voteForAnecdote} text='Vote' />
+      <Headline title='Anecdote with most votes' />
     </>
   )
 }

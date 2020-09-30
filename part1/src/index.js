@@ -29,12 +29,6 @@ const Vote = ({ votes }) => (
   </>
 )
 
-const Winner = ({winner}) => (
-  <>
-    <p> {winner}</p>
-  </>
-)
-
 const App = () => {
 
   const anecdotes = [
@@ -59,6 +53,8 @@ const App = () => {
     const storedVotes = [...vote]
     storedVotes[selected] += 1
     setVote(storedVotes)
+  }
+
 
   const mostVoted = Math.max(...vote)
 
@@ -73,13 +69,10 @@ const App = () => {
       <Button handleclick={randomAnecdote} text='Next anecdote' />
       <Button handleclick={voteForAnecdote} text='Vote' />
       <Headline title='Anecdote with most votes' />
-      <Winner winner={bestAnecdote}/>
+      <Anecdotes anecdotes={bestAnecdote} />
       <Vote votes={mostVoted} />
     </>
   )
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-)
+ReactDOM.render(<App />, document.getElementById('root'))

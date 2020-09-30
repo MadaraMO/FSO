@@ -44,10 +44,11 @@ const App = () => {
     )
   }
 
-  const [vote, setVote] = useState(new Array(anecdotes.length).fill(0))
+  const [vote, setVote] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0))
+  // new Array(anecdotes.length).fill(0)
   const voteForAnecdote = () => {
     const storedVotes = [...vote]
-    storedVotes[selected] +=1
+    storedVotes[selected] += 1
     setVote(storedVotes)
   }
 

@@ -44,7 +44,9 @@ const App = () => {
     )
   }
 
-  const [vote, setVote] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0))
+  const [vote, setVote] = useState(new Uint8Array(anecdotes.length))
+  // new Array(anecdotes.length+1).join('0').split('').map(parseFloat)
+  // Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0)
   // new Array(anecdotes.length).fill(0)
   const voteForAnecdote = () => {
     const storedVotes = [...vote]

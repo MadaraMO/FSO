@@ -60,7 +60,6 @@ const App = () => {
 
   const bestAnecdote = anecdotes[vote.indexOf(mostVoted)]
 
-
   return (
     <>
       <Headline title='Anecdote of the day' />

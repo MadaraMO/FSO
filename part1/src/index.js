@@ -15,9 +15,9 @@ const Anecdotes = ({ anecdotes }) => (
   </>
 )
 
-const Button = ({ onClick, text }) => (
+const Button = ({ handleclick, text }) => (
   <>
-    <button onClick={onClick}>
+    <button onClick={handleclick}>
       {text}
     </button>
   </>
@@ -65,8 +65,8 @@ const App = () => {
       <Headline title='Anecdote of the day' />
       <Anecdotes anecdotes={anecdotes[selected]} />
       <Vote votes={vote[selected]} />
-      <Button onClick={randomAnecdote} text='Next anecdote' />
-      <Button onClick={voteForAnecdote} text='Vote' />
+      <Button handleclick={randomAnecdote} text='Next anecdote' />
+      <Button handleclick={voteForAnecdote} text='Vote' />
       <Headline title='Anecdote with most votes' />
       <Anecdotes anecdotes={bestAnecdote} />
       <Vote votes={mostVoted} />

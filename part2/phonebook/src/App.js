@@ -13,7 +13,9 @@ const Persons = ({ persons }) => (
 
 const App = () => {
     const [persons, setPersons] = useState([
-        { name: 'Arto Hellas' }
+        { name: 'Arto Hellas',
+        id: 0
+    }
     ])
     const [newName, setNewName] = useState('Aloha, mermaid...')
 

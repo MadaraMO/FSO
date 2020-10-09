@@ -1,37 +1,36 @@
 import React, { useState } from 'react'
 
 const Persons = ({ persons }) => (
-    <>
     <ul>
-        {persons.map((person) =>
-           <li key={person.id}>{person.name}</li>  
+        {
+        persons.map((person) =>
+            <li key={person.id}>{person.name}</li>
         )}
-       
+
     </ul>
-    </>
-)  
+)
 
 const App = () => {
     const [persons, setPersons] = useState([
-        { name: 'Arto Hellas',
-        id: 0
-    }
+        {
+            name: 'Arto Hellas',
+            id: 0
+        }
     ])
+
     const [newName, setNewName] = useState('Aloha, mermaid...')
 
     const addName = (e) => {
         e.preventDefault()
         const nameObject = {
-            content: newName,
+            name: newName,
             id: persons.length + 1,
         }
         setPersons(persons.concat(nameObject))
         setNewName('')
-        console.log(persons.name)
     }
 
     const handleNameChange = (e) => {
-        console.log(e.target.value)
         setNewName(e.target.value)
     }
 
@@ -50,12 +49,9 @@ const App = () => {
                     <button type="submit">add</button>
                 </div>
             </form>
-        
+
             <h2>Numbers</h2>
-            <Persons persons={persons}/>
-      
-            <div>debug: {newName}</div>
-           
+            <Persons persons={persons} />
         </div>
     )
 }

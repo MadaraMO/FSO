@@ -1,14 +1,6 @@
 import React, { useState } from 'react'
+import Persons from './components/Persons'
 
-const Persons = ({ persons }) => (
-    <ul>
-        {
-        persons.map((person) =>
-            <li key={person.id}>{person.name}</li>
-        )}
-
-    </ul>
-)
 
 const App = () => {
     const [persons, setPersons] = useState([

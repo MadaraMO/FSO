@@ -11,21 +11,24 @@ const App = () => {
     ])
 
     const [newName, setNewName] = useState('Aloha, mermaid...')
+    const [newNumber, setNewNumber] = useState('')
 
-    const addName = (e) => {
+    const addContact = (e) => {
         e.preventDefault()
 
-            const nameObject = {
-                name: newName,
-                id: persons.length + 1,
-            }
+        const nameObject = {
+            name: newName,
+            number: newNumber,
+            id: persons.length + 1,
+        }
 
-            setPersons(persons.concat(nameObject))
-            setNewName('')
+        setPersons(persons.concat(nameObject))
+        setNewName('')
+        setNewNumber('')
 
-            if (persons.map(person => person.name).includes(newName)) {
-                alert(`${newName} is already added to phonebook`)
-            }
+        if (persons.map(person => person.name).includes(newName)) {
+            alert(`${newName} is already added to phonebook`)
+        }
     }
 
 
@@ -33,16 +36,24 @@ const App = () => {
         setNewName(e.target.value)
     }
 
+    const handleNumberChange = (e) => {
+        setNewNumber(e.target.value)
+    }
 
 
     return (
         <div>
             <h2>Phonebook</h2>
-            <form onSubmit={addName}>
+            <form onSubmit={addContact}>
                 <div>
                     name: <input
                         value={newName}
                         onChange={handleNameChange} />
+                </div>
+                <div>
+                number: <input
+                        value={newNumber}
+                        onChange={handleNumberChange} />
                 </div>
                 <div>
                     <button type="submit">add</button>

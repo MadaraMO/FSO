@@ -14,13 +14,20 @@ const App = () => {
 
     const addName = (e) => {
         e.preventDefault()
-        const nameObject = {
-            name: newName,
-            id: persons.length + 1,
-        }
-        setPersons(persons.concat(nameObject))
-        setNewName('')
+
+            const nameObject = {
+                name: newName,
+                id: persons.length + 1,
+            }
+
+            setPersons(persons.concat(nameObject))
+            setNewName('')
+
+            if (persons.map(person => person.name).includes(newName)) {
+                alert(`${newName} is already added to phonebook`)
+            }
     }
+
 
     const handleNameChange = (e) => {
         setNewName(e.target.value)

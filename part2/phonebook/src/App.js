@@ -35,7 +35,7 @@ const App = () => {
         }
     }
 
-    const namesToShow = showAll
+    const personsToShow = showAll
         ? persons
         : persons.filter(person =>
             person.name.toLowerCase().includes(searchName.toLowerCase()))
@@ -70,7 +70,7 @@ const App = () => {
                 handleNumberChange={handleNumberChange} />
             <h2>Numbers</h2>
             <Persons
-                persons={namesToShow} />
+                persons={personsToShow} />
         </>
     )
 }

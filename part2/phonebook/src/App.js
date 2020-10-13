@@ -59,7 +59,6 @@ const App = () => {
         <>
             <h2>Phonebook</h2>
             <Filter
-                searchName={searchName}
                 handleSearchName={handleSearchName} />
             <h2>Add New Contact</h2>
             <PersonForm

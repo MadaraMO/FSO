@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Persons from './components/Persons'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
 
 
 const App = () => {
@@ -10,7 +12,7 @@ const App = () => {
         { name: 'Mary Poppendieck', number: '39-23-6423122', id: 3 }
     ])
 
-    const [newName, setNewName] = useState('Aloha, mermaid...')
+    const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
     const [searchName, setSearchName] = useState('')
     const [showAll, setShowAll] = useState(true)
@@ -54,35 +56,22 @@ const App = () => {
 
 
     return (
-        <div>
+        <>
             <h2>Phonebook</h2>
-            <div>
-                Name: <input
-                    value={searchName}
-                    onChange={handleSearchName}
-                />
-            </div>
-
+            <Filter
+                searchName={searchName}
+                handleSearchName={handleSearchName} />
             <h2>Add New Contact</h2>
-            <form onSubmit={addContact}>
-                <div>
-                    name: <input
-                        value={newName}
-                        onChange={handleNameChange} />
-                </div>
-                <div>
-                    number: <input
-                        value={newNumber}
-                        onChange={handleNumberChange} />
-                </div>
-                <div>
-                    <button type="submit">add</button>
-                </div>
-            </form>
-
+            <PersonForm
+                addContact={addContact}
+                newName={newName}
+                newNumber={newNumber}
+                handleNameChange={handleNameChange}
+                handleNumberChange={handleNumberChange} />
             <h2>Numbers</h2>
-            <Persons persons={namesToShow} />
-        </div>
+            <Persons
+                persons={namesToShow} />
+        </>
     )
 }
 

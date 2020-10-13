@@ -12,6 +12,8 @@ const App = () => {
 
     const [newName, setNewName] = useState('Aloha, mermaid...')
     const [newNumber, setNewNumber] = useState('')
+    const [searchName, setSearchName] = useState('')
+    const [showAll, setShowAll] = useState(true)
 
     const addContact = (e) => {
         e.preventDefault()
@@ -31,6 +33,11 @@ const App = () => {
         }
     }
 
+    const namesToShow = showAll
+        ? persons
+        : persons.filter(person =>
+            person.name.toLowerCase().includes(searchName.toLowerCase()))
+
 
     const handleNameChange = (e) => {
         setNewName(e.target.value)
@@ -40,15 +47,23 @@ const App = () => {
         setNewNumber(e.target.value)
     }
 
+    const handleSearchName = (e) => {
+        setSearchName(e.target.value)
+        setShowAll(false)
+    }
+
 
     return (
         <div>
             <h2>Phonebook</h2>
-            {/* <div>
-            search: <input
-                        value={search}
-                        onChange={handleSearch} />
-            </div> */}
+            <div>
+                Name: <input
+                    value={searchName}
+                    onChange={handleSearchName}
+                />
+            </div>
+
+            <h2>Add New Contact</h2>
             <form onSubmit={addContact}>
                 <div>
                     name: <input
@@ -66,7 +81,7 @@ const App = () => {
             </form>
 
             <h2>Numbers</h2>
-            <Persons persons={persons} />
+            <Persons persons={namesToShow} />
         </div>
     )
 }

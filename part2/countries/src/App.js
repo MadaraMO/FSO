@@ -10,66 +10,96 @@ const Filter = ({ handleFilterCountry }) => (
   </>
 )
 
-const Country = ({ countries }) => {
+const Language = ({ language }) => (
+  <li>{language}{language.key}</li>
+)
 
-  if (countries.length > 10) {
+const Country = ({ country }) => {
+  return (
+    <>
+      <h3>{country.name}</h3>
+      <p>Capital: {country.capital}</p>
+      <p>Population: {country.population}</p>
+      <h3>Language(s)</h3>
+
+      <ul>
+        {country.languages.map((language) =>
+          <Language key={language.name} language={language.name} />
+        )}
+      </ul>
+    </>
+  )
+}
+
+const List = ({ countriesList }) => {
+
+  if (countriesList.length === 0) {
+    return (
+      <p>Feel free to search for a country</p>
+    )
+
+  } else if (countriesList.length > 10) {
     return (
       <p>Too many matches, specify another filter</p>
     )
 
-  } else if (countries.length < 10) {
+  } else if (countriesList.length === 1) {
     return (
-      <ul>
-        {
-          countries.map((country) =>
-            <li key={country.name}>{country.name}</li>
+      <>
+        <ul>
+          {countriesList.map((country) =>
+            <Country key={country.name} country={country} />
           )}
-      </ul>
-    )
-    
-  } else {
-    return (
-      <p>Feel free to search for a country</p>
+        </ul>
+      </>
     )
   }
+  return (
+    <>
+      <h3>Something</h3>
+      
+    </>
+  )
 }
 
 
 
-  const App = () => {
-    const [countries, setCountries] = useState([])
-    const [filterCountry, setFilterCountry] = useState('')
-    const [showCountries, setShowCountries] = useState(true)
+
+const App = () => {
+  const [countries, setCountries] = useState([])
+  const [filterCountry, setFilterCountry] = useState('')
+  const [showCountries, setShowCountries] = useState(true)
 
 
-    useEffect(() => {
-      axios
-        .get('https://restcountries.eu/rest/v2/all')
-        .then(response => {
-          setCountries(response.data)
-        })
-    }, [])
+  useEffect(() => {
+    axios
+      .get('https://restcountries.eu/rest/v2/all')
+      .then(response => {
+        setCountries(response.data)
+      })
+  }, [])
 
 
-    const countriesToShow = showCountries
-      ? true
-      : countries
-        .filter(country =>
-          country.name.toLowerCase()
-            .includes(filterCountry.toLowerCase()))
+  const countriesToShow = showCountries
+    ? false
+    : countries
+      .filter(country =>
+        country.name.toLowerCase()
+          .includes(filterCountry.toLowerCase()))
 
 
-    const handleFilterCountry = (e) => {
-      setFilterCountry(e.target.value)
-      setShowCountries(false)
-    }
-    return (
-      <>
-        <h1>Countries</h1>
-        <Filter handleFilterCountry={handleFilterCountry} />
-        <Country countries={countriesToShow} />
-      </>
-    )
+
+  const handleFilterCountry = (e) => {
+    setFilterCountry(e.target.value)
+    setShowCountries(false)
   }
+  return (
+    <>
+      <h1>Countries</h1>
+      <Filter handleFilterCountry={handleFilterCountry} />
+      <List countriesList={countriesToShow} />
+    </>
+  )
+}
 
-  export default App;
+export default App;

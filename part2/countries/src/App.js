@@ -29,19 +29,28 @@ const Country = ({ country }) => {
         )}
       </ul>
 
-        <img alt="flag" src={country.flag} />
+      <img alt="flag" src={country.flag} />
+
+
     </>
   )
 }
 
 const List = ({ countriesList }) => {
 
-  if (countriesList.length === 0) {
+// relationship between first two conditions - 
+// they somewhat cooporate, but I don't really appreciate inconsistency
+// both should react (appear and disappear) according to the state of input field 
+// not to array length. If input is empty - "feel free", 
+// otherwise "too many matches" || countries list of 10 || the single country
+
+  if (countriesList.length > 20) {
     return (
       <p>Feel free to search for a country</p>
     )
+  }
 
-  } else if (countriesList.length > 10) {
+  else if (countriesList.length > 10) {
     return (
       <p>Too many matches, specify another filter</p>
     )
@@ -61,7 +70,7 @@ const List = ({ countriesList }) => {
     <>
       <ul>
         {countriesList.map(country =>
-        <li key={country.name}>{country.name}</li>
+          <li key={country.name}>{country.name}</li>
         )}
       </ul>
     </>
@@ -92,6 +101,8 @@ const App = () => {
       .filter(country =>
         country.name.toLowerCase()
           .includes(filterCountry.toLowerCase()))
+  // ? filterCountry === ''
+  // : <p>Feel free to search for a country</p>
 
 
 

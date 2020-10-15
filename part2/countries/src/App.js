@@ -14,6 +14,7 @@ const Language = ({ language }) => (
   <li>{language}{language.key}</li>
 )
 
+
 const Country = ({ country }) => {
   return (
     <>
@@ -56,8 +57,11 @@ const List = ({ countriesList }) => {
   }
   return (
     <>
-      <h3>Something</h3>
-      
+      <ul>
+        {countriesList.map(country =>
+        <li key={country.name}>{country.name}</li>
+        )}
+      </ul>
     </>
   )
 }
@@ -81,7 +85,7 @@ const App = () => {
 
 
   const countriesToShow = showCountries
-    ? false
+    ? countries
     : countries
       .filter(country =>
         country.name.toLowerCase()

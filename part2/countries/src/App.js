@@ -28,6 +28,8 @@ const Country = ({ country }) => {
           <Language key={language.name} language={language.name} />
         )}
       </ul>
+
+        <img alt="flag" src={country.flag} />
     </>
   )
 }

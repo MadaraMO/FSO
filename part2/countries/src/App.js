@@ -15,6 +15,17 @@ const Language = ({ language }) => (
 
 
 const Country = ({ country }) => {
+  const [weather, setWeather] = useState([])
+  // const api_key = process.env.REACT_APP_API_KEY
+
+  useEffect(() => {
+    axios
+      .get(`https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&appid=${process.env.REACT_APP_API_KEY}`)
+      .then(response => {
+        setWeather(response.data)
+      })
+  }, [country.capital])
+
   return (
     <>
       <h3>{country.name}</h3>
@@ -29,11 +40,16 @@ const Country = ({ country }) => {
       </ul>
 
       <img alt="flag" src={country.flag} />
+
+      <h3>Weather in {country.capital}</h3>
+      {weather.q}
+
     </>
   )
 }
 
 const List = ({ countriesList, handleButton }) => {
+  // the great hack undone
 
   if (countriesList.length > 20) {
     return (
@@ -103,14 +119,14 @@ const App = () => {
     // es nesaprotu, kas, ko, kāpēc === parentElement.firstChild.data)
     // atradu, nokopēju, poga strādā pareizi. bet es neatceros, ka FSO par šo būtu mācīts
     setFilterCountry(e.target.parentElement.firstChild.data)
-   
+
   }
 
   return (
     <>
       <h1>Countries</h1>
       <Filter handleFilterCountry={handleFilterCountry} />
-      <List countriesList={countriesToShow} handleButton={handleButton} filter={filterCountry} />
+      <List countriesList={countriesToShow} handleButton={handleButton} />
     </>
   )
 }

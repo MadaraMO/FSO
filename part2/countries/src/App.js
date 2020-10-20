@@ -6,12 +6,11 @@ const Filter = ({ handleFilterCountry }) => (
   <>
     <p> Find countries </p>
     <input onChange={handleFilterCountry} />
-
   </>
 )
 
 const Language = ({ language }) => (
-  <li>{language}{language.key}</li>
+  <li>{language}</li>
 )
 
 
@@ -30,19 +29,11 @@ const Country = ({ country }) => {
       </ul>
 
       <img alt="flag" src={country.flag} />
-
-
     </>
   )
 }
 
-const List = ({ countriesList }) => {
-
-// relationship between first two conditions - 
-// they somewhat cooporate, but I don't really appreciate inconsistency
-// both should react (appear and disappear) according to the state of input field 
-// not to array length. If input is empty - "feel free", 
-// otherwise "too many matches" || countries list of 10 || the single country
+const List = ({ countriesList, handleButton }) => {
 
   if (countriesList.length > 20) {
     return (
@@ -68,22 +59,19 @@ const List = ({ countriesList }) => {
   }
   return (
     <>
-      <ul>
-        {countriesList.map(country =>
-          <li key={country.name}>{country.name}</li>
-        )}
-      </ul>
+      {countriesList.map(country =>
+        <li key={country.name}>{country.name} <button onClick={handleButton}>Show</button></li>
+      )}
     </>
   )
+
 }
-
-
 
 
 const App = () => {
   const [countries, setCountries] = useState([])
   const [filterCountry, setFilterCountry] = useState('')
-  const [showCountries, setShowCountries] = useState(true)
+  const [showList, setShowList] = useState(true)
 
 
   useEffect(() => {
@@ -95,26 +83,34 @@ const App = () => {
   }, [])
 
 
-  const countriesToShow = showCountries
+  const countriesToShow = showList
     ? countries
     : countries
       .filter(country =>
         country.name.toLowerCase()
           .includes(filterCountry.toLowerCase()))
-  // ? filterCountry === ''
-  // : <p>Feel free to search for a country</p>
 
+  console.log(showList)
+  console.log(filterCountry)
 
 
   const handleFilterCountry = (e) => {
     setFilterCountry(e.target.value)
-    setShowCountries(false)
+    setShowList(false)
   }
+
+  const handleButton = (e) => {
+    // es nesaprotu, kas, ko, kāpēc === parentElement.firstChild.data)
+    // atradu, nokopēju, poga strādā pareizi. bet es neatceros, ka FSO par šo būtu mācīts
+    setFilterCountry(e.target.parentElement.firstChild.data)
+   
+  }
+
   return (
     <>
       <h1>Countries</h1>
       <Filter handleFilterCountry={handleFilterCountry} />
-      <List countriesList={countriesToShow} />
+      <List countriesList={countriesToShow} handleButton={handleButton} filter={filterCountry} />
     </>
   )
 }

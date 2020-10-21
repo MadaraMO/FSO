@@ -18,14 +18,15 @@ const Country = ({ country }) => {
   const [weather, setWeather] = useState([])
   // const api_key = process.env.REACT_APP_API_KEY
 
+
   useEffect(() => {
     axios
-      .get(`https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&appid=${process.env.REACT_APP_API_KEY}`)
+      .get(`http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=${country.capital}`)
       .then(response => {
-        setWeather(response.data)
+        setWeather(response.data.current.condition)
       })
-  }, [country.capital])
-
+  }, [country])
+  console.log(weather.current)
   return (
     <>
       <h3>{country.name}</h3>
@@ -42,14 +43,14 @@ const Country = ({ country }) => {
       <img alt="flag" src={country.flag} />
 
       <h3>Weather in {country.capital}</h3>
-      {weather.q}
-
+      <div>{weather.text}</div>
+      <img alt="flag" src={weather.icon} />
     </>
   )
 }
 
 const List = ({ countriesList, setToCountry }) => {
-
+  // joprojām šis if neiet cauri
   if (countriesList.length > 10 && !countriesList.length === 1) {
     return (
       <p>Too many matches, specify another filter</p>
@@ -81,7 +82,7 @@ const List = ({ countriesList, setToCountry }) => {
 const App = () => {
   const [countries, setCountries] = useState([])
   const [filterCountry, setFilterCountry] = useState('')
-  
+
 
 
   useEffect(() => {
@@ -107,7 +108,6 @@ const App = () => {
 
   const seeCountry = (filter) => {
     setFilterCountry(filter)
-
   }
 
   return (

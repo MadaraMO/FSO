@@ -49,45 +49,39 @@ const Country = ({ country }) => {
 }
 
 const List = ({ countriesList, setToCountry }) => {
-  // the great hack undone
 
-  if (countriesList.length > 20) {
-    return (
-      <p>Feel free to search for a country</p>
-    )
-  }
-
-  else if (countriesList.length > 10) {
+  if (countriesList.length > 10 && !countriesList.length === 1) {
     return (
       <p>Too many matches, specify another filter</p>
     )
-
   } else if (countriesList.length === 1) {
     return (
-      <>
-        <ul>
-          {countriesList.map((country) =>
-            <Country key={country.name} country={country} />
-          )}
-        </ul>
-      </>
+      <ul>
+        {countriesList.map((country) =>
+          <Country key={country.name} country={country} />
+        )}
+      </ul>
+    )
+  } else if (countriesList.length <= 10) {
+    return (
+      <ul>
+        {countriesList.map(country =>
+          <li key={country.name}>{country.name} <button onClick={() => setToCountry(country.name)}>Show</button></li>
+        )}
+      </ul>
     )
   }
   return (
-    <ul>
-      {countriesList.map(country =>
-        <li key={country.name}>{country.name} <button onClick={() => setToCountry(country.name)}>Show</button></li>
-      )}
-    </ul>
+    <p>Feel free to search for a country</p>
   )
-
 }
+
 
 
 const App = () => {
   const [countries, setCountries] = useState([])
   const [filterCountry, setFilterCountry] = useState('')
-  const [showList, setShowList] = useState(true)
+  
 
 
   useEffect(() => {
@@ -99,18 +93,16 @@ const App = () => {
   }, [])
 
 
-  const countriesToShow = showList
+  const countriesToShow = filterCountry
     ? countries
-    : countries
       .filter(country =>
         country.name.toLowerCase()
           .includes(filterCountry.toLowerCase()))
-
+    : countries
 
 
   const handleFilterCountry = (e) => {
     setFilterCountry(e.target.value)
-    setShowList(false)
   }
 
   const seeCountry = (filter) => {

@@ -48,7 +48,7 @@ const Country = ({ country }) => {
   )
 }
 
-const List = ({ countriesList, handleButton }) => {
+const List = ({ countriesList, setToCountry }) => {
   // the great hack undone
 
   if (countriesList.length > 20) {
@@ -74,11 +74,11 @@ const List = ({ countriesList, handleButton }) => {
     )
   }
   return (
-    <>
+    <ul>
       {countriesList.map(country =>
-        <li key={country.name}>{country.name} <button onClick={handleButton}>Show</button></li>
+        <li key={country.name}>{country.name} <button onClick={() => setToCountry(country.name)}>Show</button></li>
       )}
-    </>
+    </ul>
   )
 
 }
@@ -106,8 +106,6 @@ const App = () => {
         country.name.toLowerCase()
           .includes(filterCountry.toLowerCase()))
 
-  console.log(showList)
-  console.log(filterCountry)
 
 
   const handleFilterCountry = (e) => {
@@ -115,10 +113,8 @@ const App = () => {
     setShowList(false)
   }
 
-  const handleButton = (e) => {
-    // es nesaprotu, kas, ko, kāpēc === parentElement.firstChild.data)
-    // atradu, nokopēju, poga strādā pareizi. bet es neatceros, ka FSO par šo būtu mācīts
-    setFilterCountry(e.target.parentElement.firstChild.data)
+  const seeCountry = (filter) => {
+    setFilterCountry(filter)
 
   }
 
@@ -126,7 +122,7 @@ const App = () => {
     <>
       <h1>Countries</h1>
       <Filter handleFilterCountry={handleFilterCountry} />
-      <List countriesList={countriesToShow} handleButton={handleButton} />
+      <List countriesList={countriesToShow} setToCountry={seeCountry} />
     </>
   )
 }

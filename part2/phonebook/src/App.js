@@ -69,7 +69,10 @@ const App = () => {
         setShowAll(false)
     }
 
+
+    // problēma - dzēšam ar visu id. pēc tam atkal pievienojot personu, rodas id konflikts
     const removePerson = (id) => {
+        // pēc tam izmantot if (window.confirm(`Delete ${person.name}?`)) 
 
         const person = persons.find(p => p.id === id)
         const removedPerson = { ...person, id: person.id }
@@ -77,13 +80,10 @@ const App = () => {
 
         personService
             .update(id, removedPerson)
-            .then(removedPerson => {
-                setPersons(removedPerson = persons.filter(person => person.id !== id))
-                console.log(persons)
-                console.log(removedPerson)
+            .then(returnedPersons => {
+                setPersons(persons.filter(person => person.id !== returnedPersons.id))
             }
             )
-
     }
 
 

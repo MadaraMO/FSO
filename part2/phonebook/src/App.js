@@ -40,7 +40,6 @@ const App = () => {
                     setPersons(persons.concat(response.data))
                     setNewName('')
                     setNewNumber('')
-                    console.log(response)
                 })
         }
 
@@ -68,6 +67,10 @@ const App = () => {
         setShowAll(false)
     }
 
+    const removePerson = (id) => {
+        console.log(`This shit ${id} is not going to last`)
+    }
+
 
     return (
         <>
@@ -83,7 +86,8 @@ const App = () => {
                 handleNumberChange={handleNumberChange} />
             <h2>Numbers</h2>
             <Persons
-                persons={personsToShow} />
+                persons={personsToShow}
+                removePerson={removePerson} />
         </>
     )
 }

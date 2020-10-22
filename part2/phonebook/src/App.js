@@ -68,7 +68,7 @@ const App = () => {
     }
 
     const removePerson = (id) => {
-        console.log(`This shit ${id} is not going to last`)
+        console.log(`${id} is not going to last`)
     }
 
 

@@ -71,15 +71,17 @@ const App = () => {
 
     const removePerson = (id) => {
 
-        // const person = persons.find(p => p.id === id)
-        // const removedPerson = { ...person, id: person.id }
+        const person = persons.find(p => p.id === id)
+        const removedPerson = { ...person, id: person.id }
         console.log(`${id} is not going to last`)
 
-        // personService
-        //     .update(id, removedPerson)
-        //     .then(deletedPerson => {
-        //         setPersons(persons.map(person => person.id !== id ? person : deletedPerson))
-        //     })
+        personService
+            .update(id, removedPerson)
+            .then(removedPerson => {
+                setPersons(persons.filter(person => person.id !== removedPerson.id)
+                )
+            }
+            )
 
     }
 

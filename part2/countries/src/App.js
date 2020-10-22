@@ -55,14 +55,6 @@ const List = ({ countriesList, setToCountry }) => {
     return (
       <p>Too many matches, specify another filter</p>
     )
-  } else if (countriesList.length <= 10) {
-    return (
-      <ul>
-        {countriesList.map(country =>
-          <li key={country.name}>{country.name} <button onClick={() => setToCountry(country.name)}>Show</button></li>
-        )}
-      </ul>
-    )
   } else if (countriesList.length === 1) {
     return (
       <>
@@ -70,6 +62,14 @@ const List = ({ countriesList, setToCountry }) => {
           <Country key={country.name} country={country} />
         )}
       </>
+    )
+  } else if (countriesList.length <= 10) {
+    return (
+      <ul>
+        {countriesList.map(country =>
+          <li key={country.name}>{country.name} <button onClick={() => setToCountry(country.name)}>Show</button></li>
+        )}
+      </ul>
     )
   }
   return (

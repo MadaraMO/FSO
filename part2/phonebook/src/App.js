@@ -78,8 +78,9 @@ const App = () => {
         personService
             .update(id, removedPerson)
             .then(removedPerson => {
-                setPersons(persons.filter(person => person.id !== removedPerson.id)
-                )
+                setPersons(removedPerson = persons.filter(person => person.id !== id))
+                console.log(persons)
+                console.log(removedPerson)
             }
             )
 

@@ -5,6 +5,7 @@ import PersonForm from './components/PersonForm'
 import personService from './services/persons'
 
 
+
 const App = () => {
     const [persons, setPersons] = useState([])
 
@@ -16,8 +17,9 @@ const App = () => {
     useEffect(() => {
         personService
             .getAll()
-            .then(response => {
-                setPersons(response.data)
+            // https://javascript.info/promise-chaining
+            .then(initialData => {
+                setPersons(initialData)
             })
     }, [])
 
@@ -36,8 +38,8 @@ const App = () => {
 
             personService
                 .create(newObject)
-                .then(response => {
-                    setPersons(persons.concat(response.data))
+                .then(returnedPerson => {
+                    setPersons(persons.concat(returnedPerson))
                     setNewName('')
                     setNewNumber('')
                 })
@@ -68,7 +70,17 @@ const App = () => {
     }
 
     const removePerson = (id) => {
+
+        // const person = persons.find(p => p.id === id)
+        // const removedPerson = { ...person, id: person.id }
         console.log(`${id} is not going to last`)
+
+        // personService
+        //     .update(id, removedPerson)
+        //     .then(deletedPerson => {
+        //         setPersons(persons.map(person => person.id !== id ? person : deletedPerson))
+        //     })
+
     }
 
 

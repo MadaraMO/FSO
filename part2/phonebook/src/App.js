@@ -70,19 +70,17 @@ const App = () => {
     }
 
 
-    // problēma - dzēšam ar visu id. pēc tam atkal pievienojot personu, rodas id konflikts
     const removePerson = (id) => {
-        // pēc tam izmantot if (window.confirm(`Delete ${person.name}?`)) 
 
         const person = persons.find(p => p.id === id)
-        const removedPerson = { ...person, id: person.id }
+        // const removedPerson = { ...person }
         console.log(`${id} is not going to last`)
+        window.confirm(`Delete ${person.name}?`)
 
         personService
-            .update(id, removedPerson)
-            .then(returnedPersons => {
-                setPersons(persons.filter(person => person.id !== returnedPersons.id))
-            }
+            .update(id)
+            .then(
+                setPersons(persons.filter((p) => p.id !== id))
             )
     }
 

@@ -3,16 +3,27 @@ import Persons from './components/Persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import personService from './services/persons'
+import './index.css'
 
+const Notification = ({ message }) => {
+    if (message === null) {
+        return null
+    }
 
+    return (
+        <div className="error">
+            {message}
+        </div>
+    )
+}
 
 const App = () => {
     const [persons, setPersons] = useState([])
-
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
     const [searchName, setSearchName] = useState('')
     const [showAll, setShowAll] = useState(true)
+    const [errorMessage, setErrorMessage] = useState(null)
 
     useEffect(() => {
         personService
@@ -23,42 +34,60 @@ const App = () => {
             })
     }, [])
 
-    
+
 
 
     const addContact = (e) => {
         e.preventDefault()
-        const person = persons.find((p) => p.name === newName)
-        const confirmation = window.confirm(`${newName} is already added to phonebook. Replace numbers?`)
 
         const newObject = {
             name: newName,
             number: newNumber
         }
 
-        personService
-            .create(newObject)
-            .then(returnedPerson => {
-                setPersons(persons.concat(returnedPerson))
-                setNewName('')
-                setNewNumber('')
-            })
+        const person = persons.find(p => p.name === newName)
 
-
-        if (confirmation) {
+        if (persons.some(person => person.name === newName)) {
+            window.confirm(`${newName} is already added to phonebook. Replace numbers?`)
             const updatedPerson = { ...person, number: newNumber }
-            
-//         if (persons.some(person => person.name === newName)) {
-    //             window.confirm(`${persons.name} is already added to phonebook. Replace numbers?`)
+
             personService
-                .update(person.id, updatedPerson)
+                .update(updatedPerson.id, updatedPerson)
+                .then(
+                    setPersons(persons.map(p => p.id !== updatedPerson.id ? p : updatedPerson)),
+                    setNewName(''),
+                    setNewNumber('')
+                )
+                .catch(
+                    setErrorMessage(`${newName}'s number is replaced.`),
+                    setTimeout(() => {
+                        setErrorMessage(null)
+                    }, 5000)
+                )
+        } else {
+
+            personService
+                .create(newObject)
                 .then(returnedPerson => {
-                    setPersons(persons.map((p) => (p.id !== persons.id ? p : returnedPerson)))
+                    setPersons(persons.concat(returnedPerson))
+                    setNewName('')
                     setNewNumber('')
                 })
         }
     }
 
+    const removePerson = (id) => {
+
+        const person = persons.find(p => p.id === id)
+        window.confirm(`Delete ${person.name}?`)
+
+        personService
+            .remove(id)
+            .then(
+                setPersons(persons.filter(p => p.id !== id))
+                // laukums filtra inputā nenotīrās
+            )
+    }
 
     const personsToShow = showAll
         ? persons
@@ -79,25 +108,14 @@ const App = () => {
     const handleSearchName = (e) => {
         setSearchName(e.target.value)
         setShowAll(false)
+        // laukums filtra inputā nenotīrās
     }
 
-
-    const removePerson = (id) => {
-
-        const person = persons.find(p => p.id === id)
-        window.confirm(`Delete ${person.name}?`)
-
-        personService
-            .remove(id)
-            .then(
-                setPersons(persons.filter((p) => p.id !== id))
-            )
-    }
 
 
     return (
         <>
-            <h2>Phonebook</h2>
+            <h1>Phonebook</h1>
             <Filter
                 handleSearchName={handleSearchName} />
             <h2>Add New Contact</h2>
@@ -107,10 +125,12 @@ const App = () => {
                 newNumber={newNumber}
                 handleNameChange={handleNameChange}
                 handleNumberChange={handleNumberChange} />
+            <Notification message={errorMessage} />
             <h2>Numbers</h2>
             <Persons
                 persons={personsToShow}
                 removePerson={removePerson} />
+
         </>
     )
 }

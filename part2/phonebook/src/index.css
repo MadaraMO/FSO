@@ -1,0 +1,25 @@
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  color: #0c1616;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+h2 {
+  color: #021818;
+  text-transform: uppercase;
+}
+
+.error {
+  color: rgb(41, 163, 17);
+  background: rgb(240, 238, 238);
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}

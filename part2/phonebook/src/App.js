@@ -23,28 +23,33 @@ const App = () => {
             })
     }, [])
 
+    // const personUpdateError = (error) => {
+
+    //     const updatePerson = { ...persons, number: newNumber }
+    //     const personMatch = () => {
+    //         if (persons.some(person => person.name === newName)) {
+    //             window.confirm(`${persons.name} is already added to phonebook. Replace numbers?`)
+    //         }
+    //     } 
+
+    // }
+
 
     const addContact = (e) => {
         e.preventDefault()
-        if (persons.some(person => person.name === newName)) {
-            alert(`${newName} is already added to phonebook`)
-        } else {
 
-            const newObject = {
-                name: newName,
-                number: newNumber,
-                id: persons.length + 1,
-            }
-
-            personService
-                .create(newObject)
-                .then(returnedPerson => {
-                    setPersons(persons.concat(returnedPerson))
-                    setNewName('')
-                    setNewNumber('')
-                })
+        const newObject = {
+            name: newName,
+            number: newNumber
         }
 
+        personService
+            .create(newObject)
+            .then(returnedPerson => {
+                setPersons(persons.concat(returnedPerson))
+                setNewName('')
+                setNewNumber('')
+            })
 
     }
 
@@ -73,8 +78,6 @@ const App = () => {
     const removePerson = (id) => {
 
         const person = persons.find(p => p.id === id)
-        // const removedPerson = { ...person }
-        console.log(`${id} is not going to last`)
         window.confirm(`Delete ${person.name}?`)
 
         personService

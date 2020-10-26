@@ -10,7 +10,7 @@ const List = ({ countriesList, setToCountry }) => {
         )
     }
 
-    if (countriesList.length <= 10) {
+    if (countriesList.length > 1) {
         return (
             <ul>
                 {countriesList.map(country =>
@@ -20,12 +20,19 @@ const List = ({ countriesList, setToCountry }) => {
         )
     }
 
-    if (countriesList.length - 1) {
+    if (countriesList.length === 1) {
+        
         return (
-            <Country country={country} />
+            <>
+                {
+                    countriesList.map((country) =>
+                        <Country key={country.name} country={country} />
+                    )
+                }
+            </>
         )
     }
-    
+
     return (
         <p>Feel free to search for a country</p>
     )

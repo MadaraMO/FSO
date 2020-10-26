@@ -23,7 +23,7 @@ const App = () => {
     const [newNumber, setNewNumber] = useState('')
     const [searchName, setSearchName] = useState('')
     const [showAll, setShowAll] = useState(true)
-    const [errorMessage, setErrorMessage] = useState(null)
+    const [message, setMessage] = useState(null)
 
     useEffect(() => {
         personService
@@ -59,9 +59,9 @@ const App = () => {
                     setNewNumber('')
                 )
                 .catch(
-                    setErrorMessage(`${newName}'s number is replaced.`),
+                    setMessage(`${newName}'s number is replaced`),
                     setTimeout(() => {
-                        setErrorMessage(null)
+                        setMessage(null)
                     }, 5000)
                 )
         } else {
@@ -72,6 +72,10 @@ const App = () => {
                     setPersons(persons.concat(returnedPerson))
                     setNewName('')
                     setNewNumber('')
+                    setMessage(`${newName} is now in phonebook`)
+                    setTimeout(() => {
+                        setMessage(null)
+                    }, 5000)
                 })
         }
     }
@@ -84,7 +88,11 @@ const App = () => {
         personService
             .remove(id)
             .then(
-                setPersons(persons.filter(p => p.id !== id))
+                setPersons(persons.filter(p => p.id !== id)),
+                setMessage(`Deleted ${person.name}`),
+                setTimeout(() => {
+                    setMessage(null)
+                }, 5000)
                 // laukums filtra inputā nenotīrās
             )
     }
@@ -125,7 +133,7 @@ const App = () => {
                 newNumber={newNumber}
                 handleNameChange={handleNameChange}
                 handleNumberChange={handleNumberChange} />
-            <Notification message={errorMessage} />
+            <Notification message={message} />
             <h2>Numbers</h2>
             <Persons
                 persons={personsToShow}

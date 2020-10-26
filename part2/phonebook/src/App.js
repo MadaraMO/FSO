@@ -23,20 +23,13 @@ const App = () => {
             })
     }, [])
 
-    // const personUpdateError = (error) => {
-
-    //     const updatePerson = { ...persons, number: newNumber }
-    //     const personMatch = () => {
-    //         if (persons.some(person => person.name === newName)) {
-    //             window.confirm(`${persons.name} is already added to phonebook. Replace numbers?`)
-    //         }
-    //     } 
-
-    // }
+    
 
 
     const addContact = (e) => {
         e.preventDefault()
+        const person = persons.find((p) => p.name === newName)
+        const confirmation = window.confirm(`${newName} is already added to phonebook. Replace numbers?`)
 
         const newObject = {
             name: newName,
@@ -51,7 +44,21 @@ const App = () => {
                 setNewNumber('')
             })
 
+
+        if (confirmation) {
+            const updatedPerson = { ...person, number: newNumber }
+            
+//         if (persons.some(person => person.name === newName)) {
+    //             window.confirm(`${persons.name} is already added to phonebook. Replace numbers?`)
+            personService
+                .update(person.id, updatedPerson)
+                .then(returnedPerson => {
+                    setPersons(persons.map((p) => (p.id !== persons.id ? p : returnedPerson)))
+                    setNewNumber('')
+                })
+        }
     }
+
 
     const personsToShow = showAll
         ? persons
@@ -81,7 +88,7 @@ const App = () => {
         window.confirm(`Delete ${person.name}?`)
 
         personService
-            .update(id)
+            .remove(id)
             .then(
                 setPersons(persons.filter((p) => p.id !== id))
             )

@@ -2,32 +2,12 @@ import React, { useState, useEffect } from 'react'
 import Persons from './components/Persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
+import Notification from './components/Notification'
+import Error from './components/Error'
 import personService from './services/persons'
 import './index.css'
 
-const Notification = ({ message }) => {
-    if (message === null) {
-        return null
-    }
 
-    return (
-        <div className="notification">
-            {message}
-        </div>
-    )
-}
-
-const Error = ({ message }) => {
-    if (message === null) {
-        return null
-    }
-
-    return (
-        <div className="error">
-            {message}
-        </div>
-    )
-}
 
 const App = () => {
     const [persons, setPersons] = useState([])
@@ -37,6 +17,7 @@ const App = () => {
     const [showAll, setShowAll] = useState(true)
     const [message, setMessage] = useState(null)
     const [error, setErrorMessage] = useState(null)
+
 
     useEffect(() => {
         personService
@@ -59,25 +40,23 @@ const App = () => {
         }
 
         const person = persons.find(p => p.name === newName)
-
+        const updatedPerson = { ...person, number: newNumber }
 
         if (persons.some(person => person.name === newName)) {
+
             window.confirm(`${newName} is already added to phonebook. Replace numbers?`)
-            const updatedPerson = { ...person, number: newNumber }
             personService
                 .update(updatedPerson.id, updatedPerson)
                 .then(
                     setPersons(persons.map(p => p.id !== updatedPerson.id ? p : updatedPerson)),
                     setNewName(''),
-                    setNewNumber('')
-                )
-                .then(
+                    setNewNumber(''),
                     setMessage(`${newName}'s number is replaced`),
                     setTimeout(() => {
                         setMessage(null)
-                    }, 5000)
-                )
-                .catch( () => {
+                    }, 5000))
+
+                .catch(() => {
                     setMessage(null)
                     setErrorMessage(`${newName} has allready been removed`)
                     setTimeout(() => {
@@ -85,9 +64,8 @@ const App = () => {
                     }, 5000)
                     setPersons(persons.filter(p => p.name !== newName))
                 }
-                    
-
                 )
+
         } else {
 
             personService

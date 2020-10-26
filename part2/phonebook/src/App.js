@@ -11,6 +11,18 @@ const Notification = ({ message }) => {
     }
 
     return (
+        <div className="notification">
+            {message}
+        </div>
+    )
+}
+
+const Error = ({ message }) => {
+    if (message === null) {
+        return null
+    }
+
+    return (
         <div className="error">
             {message}
         </div>
@@ -24,6 +36,7 @@ const App = () => {
     const [searchName, setSearchName] = useState('')
     const [showAll, setShowAll] = useState(true)
     const [message, setMessage] = useState(null)
+    const [error, setErrorMessage] = useState(null)
 
     useEffect(() => {
         personService
@@ -47,10 +60,10 @@ const App = () => {
 
         const person = persons.find(p => p.name === newName)
 
+
         if (persons.some(person => person.name === newName)) {
             window.confirm(`${newName} is already added to phonebook. Replace numbers?`)
             const updatedPerson = { ...person, number: newNumber }
-
             personService
                 .update(updatedPerson.id, updatedPerson)
                 .then(
@@ -58,11 +71,22 @@ const App = () => {
                     setNewName(''),
                     setNewNumber('')
                 )
-                .catch(
+                .then(
                     setMessage(`${newName}'s number is replaced`),
                     setTimeout(() => {
                         setMessage(null)
                     }, 5000)
+                )
+                .catch( () => {
+                    setMessage(null)
+                    setErrorMessage(`${newName} has allready been removed`)
+                    setTimeout(() => {
+                        setErrorMessage(null)
+                    }, 5000)
+                    setPersons(persons.filter(p => p.name !== newName))
+                }
+                    
+
                 )
         } else {
 
@@ -89,7 +113,7 @@ const App = () => {
             .remove(id)
             .then(
                 setPersons(persons.filter(p => p.id !== id)),
-                setMessage(`Deleted ${person.name}`),
+                setMessage(`${person.name} is gone now`),
                 setTimeout(() => {
                     setMessage(null)
                 }, 5000)
@@ -134,11 +158,11 @@ const App = () => {
                 handleNameChange={handleNameChange}
                 handleNumberChange={handleNumberChange} />
             <Notification message={message} />
+            <Error message={error} />
             <h2>Numbers</h2>
             <Persons
                 persons={personsToShow}
                 removePerson={removePerson} />
-
         </>
     )
 }

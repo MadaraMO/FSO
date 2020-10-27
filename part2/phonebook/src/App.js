@@ -10,6 +10,24 @@ import './index.css'
 
 
 const App = () => {
+    const bodyStyle = {
+        // nope, šādi nestrādā
+        fontFamily: `"Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+            "Lucida Sans Unicode", Geneva, Verdana, sans - serif`
+    }
+
+    const h1Style = {
+        // jus! hex aiziet
+        color: `#0c1616`,
+        textTransform: 'uppercase',
+        textAlign: 'center'
+    }
+
+    const h2Style = {
+        color: `#021818`,
+        textTransform: 'uppercase'
+    }
+
     const [persons, setPersons] = useState([])
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
@@ -44,7 +62,7 @@ const App = () => {
 
         if (persons.some(person => person.name === newName)) {
 
-            window.confirm(`${newName} is already added to phonebook. Replace numbers?`)
+            window.confirm(`${newName} is already in phonebook. Replace numbers?`)
             personService
                 .update(updatedPerson.id, updatedPerson)
                 .then(
@@ -124,11 +142,11 @@ const App = () => {
 
 
     return (
-        <>
-            <h1>Phonebook</h1>
+        <div style={bodyStyle}>
+            <h1 style={h1Style}>Phonebook</h1>
             <Filter
                 handleSearchName={handleSearchName} />
-            <h2>Add New Contact</h2>
+            <h2 style={h2Style}>Add New Contact</h2>
             <PersonForm
                 addContact={addContact}
                 newName={newName}
@@ -137,11 +155,12 @@ const App = () => {
                 handleNumberChange={handleNumberChange} />
             <Notification message={message} />
             <Error message={error} />
-            <h2>Numbers</h2>
+            {/* bet tad šādi man jāraksta katrā h2 style */}
+            <h2 style={h2Style}>Numbers</h2>
             <Persons
                 persons={personsToShow}
                 removePerson={removePerson} />
-        </>
+        </div>
     )
 }
 

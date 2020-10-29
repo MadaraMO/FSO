@@ -5,15 +5,14 @@ import PersonForm from './components/PersonForm'
 import Notification from './components/Notification'
 import Error from './components/Error'
 import personService from './services/persons'
-import './index.css'
+
 
 
 
 const App = () => {
     const bodyStyle = {
-        // nope, šādi nestrādā
         fontFamily: `"Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-            "Lucida Sans Unicode", Geneva, Verdana, sans - serif`
+            "Lucida Sans Unicode", Geneva, Verdana, sansSerif`
     }
 
     const h1Style = {
@@ -57,12 +56,13 @@ const App = () => {
             number: newNumber
         }
 
-        const person = persons.find(p => p.name === newName)
-        const updatedPerson = { ...person, number: newNumber }
 
         if (persons.some(person => person.name === newName)) {
+            const person = persons.find(p => p.name === newName)
+            const updatedPerson = { ...person, number: newNumber }
 
             window.confirm(`${newName} is already in phonebook. Replace numbers?`)
+
             personService
                 .update(updatedPerson.id, updatedPerson)
                 .then(
@@ -100,10 +100,13 @@ const App = () => {
         }
     }
 
+
+
     const removePerson = (id) => {
 
         const person = persons.find(p => p.id === id)
         window.confirm(`Delete ${person.name}?`)
+        setSearchName('')
 
         personService
             .remove(id)
@@ -113,7 +116,7 @@ const App = () => {
                 setTimeout(() => {
                     setMessage(null)
                 }, 5000)
-                // laukums filtra inputā nenotīrās
+                // laukums filtra inputā nenotīrās, JO es to neizdzēšu! un vēl tur ir daudz nepilnību, 
             )
     }
 
@@ -136,7 +139,8 @@ const App = () => {
     const handleSearchName = (e) => {
         setSearchName(e.target.value)
         setShowAll(false)
-        // laukums filtra inputā nenotīrās
+
+        // laukums filtra inputā nenotīrās, JO es to neizdzēšu!
     }
 
 
@@ -155,7 +159,7 @@ const App = () => {
                 handleNumberChange={handleNumberChange} />
             <Notification message={message} />
             <Error message={error} />
-            {/* bet tad šādi man jāraksta katrā h2 style */}
+            {/* bet tad šādi man jāraksta katrā h2  */}
             <h2 style={h2Style}>Numbers</h2>
             <Persons
                 persons={personsToShow}

@@ -16,7 +16,6 @@ const App = () => {
     }
 
     const h1Style = {
-        // jus! hex aiziet
         color: `#0c1616`,
         textTransform: 'uppercase',
         textAlign: 'center'
@@ -47,7 +46,6 @@ const App = () => {
 
 
 
-
     const addContact = (e) => {
         e.preventDefault()
 
@@ -63,19 +61,21 @@ const App = () => {
 
             window.confirm(`${newName} is already in phonebook. Replace numbers?`)
 
+
             personService
                 .update(updatedPerson.id, updatedPerson)
-                .then(
-                    setPersons(persons.map(p => p.id !== updatedPerson.id ? p : updatedPerson)),
-                    setNewName(''),
-                    setNewNumber(''),
-                    setMessage(`${newName}'s number is replaced`),
+                .then(() => {
+                    setPersons(persons.map(p => p.id !== updatedPerson.id ? p : updatedPerson))
+                    setNewName('')
+                    setNewNumber('')
+                    setMessage(`${newName}'s number is replaced`)
                     setTimeout(() => {
                         setMessage(null)
-                    }, 5000))
+                    }, 5000)
+                })
 
                 .catch(() => {
-                    setMessage(null)
+                    // setMessage(null)
                     setErrorMessage(`${newName} has allready been removed`)
                     setTimeout(() => {
                         setErrorMessage(null)
@@ -110,14 +110,13 @@ const App = () => {
 
         personService
             .remove(id)
-            .then(
-                setPersons(persons.filter(p => p.id !== id)),
-                setMessage(`${person.name} is gone now`),
+            .then(() => {
+                setPersons(persons.filter(p => p.id !== id))
+                setMessage(`${person.name} is gone now`)
                 setTimeout(() => {
                     setMessage(null)
                 }, 5000)
-                // laukums filtra inputā nenotīrās, JO es to neizdzēšu! un vēl tur ir daudz nepilnību, 
-            )
+            })
     }
 
     const personsToShow = showAll
@@ -139,8 +138,6 @@ const App = () => {
     const handleSearchName = (e) => {
         setSearchName(e.target.value)
         setShowAll(false)
-
-        // laukums filtra inputā nenotīrās, JO es to neizdzēšu!
     }
 
 

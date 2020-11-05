@@ -21,15 +21,10 @@ const List = ({ countriesList, setToCountry }) => {
     }
 
     if (countriesList.length === 1) {
-        
+        const country = countriesList[0]
+
         return (
-            <>
-                {
-                    countriesList.map((country) =>
-                        <Country key={country.name} country={country} />
-                    )
-                }
-            </>
+            <Country country={country} />
         )
     }
 

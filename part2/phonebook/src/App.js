@@ -71,14 +71,16 @@ const App = () => {
                         setTimeout(() => {
                             setMessage(null)
                         }, 5000)
-                    }).catch(() => {
+                    }).catch((error) => {
                         setNewName('')
                         setNewNumber('')
-                        setErrorMessage(`${newName} has allready been removed`)
+                        setErrorMessage(`${error.response.data.error}`)
+                        // setErrorMessage(`${newName} has allready been removed`)
                         setTimeout(() => {
                             setErrorMessage(null)
                         }, 5000)
                         setPersons(persons.filter(p => p.name !== newName))
+                        // console.log(error.response.data)
                     })
             }
         } else {
@@ -93,14 +95,16 @@ const App = () => {
                         setMessage(null)
                     }, 5000)
                 })
-                .catch(() => {
+                .catch((error) => {
                     setNewName('')
                     setNewNumber('')
-                    setErrorMessage(`${newName} has allready been removed`)
+                    // setErrorMessage(`${newName} has allready been removed`)
+                    setErrorMessage(`${error.response.data.error}`)
                     setTimeout(() => {
                         setErrorMessage(null)
                     }, 5000)
                     setPersons(persons.filter(p => p.name !== newName))
+                    // console.log(error.response.data)
                 })
         }
     }

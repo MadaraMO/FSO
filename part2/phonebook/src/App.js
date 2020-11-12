@@ -16,7 +16,6 @@ const App = () => {
     }
 
     const h1Style = {
-        // jus! hex aiziet
         color: `#0c1616`,
         textTransform: 'uppercase',
         textAlign: 'center'
@@ -47,7 +46,6 @@ const App = () => {
 
 
 
-
     const addContact = (e) => {
         e.preventDefault()
 
@@ -56,36 +54,34 @@ const App = () => {
             number: newNumber
         }
 
+        const person = persons.find(p => p.name === newName)
 
         if (persons.some(person => person.name === newName)) {
-            const person = persons.find(p => p.name === newName)
-            const updatedPerson = { ...person, number: newNumber }
+            const updateNumber = window.confirm(`${newName} is already in phonebook. Replace numbers?`)
 
-            window.confirm(`${newName} is already in phonebook. Replace numbers?`)
-
-            personService
-                .update(updatedPerson.id, updatedPerson)
-                .then(
-                    setPersons(persons.map(p => p.id !== updatedPerson.id ? p : updatedPerson)),
-                    setNewName(''),
-                    setNewNumber(''),
-                    setMessage(`${newName}'s number is replaced`),
-                    setTimeout(() => {
-                        setMessage(null)
-                    }, 5000))
-
-                .catch(() => {
-                    setMessage(null)
-                    setErrorMessage(`${newName} has allready been removed`)
-                    setTimeout(() => {
-                        setErrorMessage(null)
-                    }, 5000)
-                    setPersons(persons.filter(p => p.name !== newName))
-                }
-                )
-
+            if (updateNumber) {
+                const updatedPerson = { ...person, number: newNumber }
+                personService
+                    .update(updatedPerson.id, updatedPerson)
+                    .then(() => {
+                        setPersons(persons.map(p => p.id !== updatedPerson.id ? p : updatedPerson))
+                        setNewName('')
+                        setNewNumber('')
+                        setMessage(`${newName}'s number is replaced`)
+                        setTimeout(() => {
+                            setMessage(null)
+                        }, 5000)
+                    }).catch(() => {
+                        setNewName('')
+                        setNewNumber('')
+                        setErrorMessage(`${newName} has allready been removed`)
+                        setTimeout(() => {
+                            setErrorMessage(null)
+                        }, 5000)
+                        setPersons(persons.filter(p => p.name !== newName))
+                    })
+            }
         } else {
-
             personService
                 .create(newObject)
                 .then(returnedPerson => {
@@ -97,28 +93,37 @@ const App = () => {
                         setMessage(null)
                     }, 5000)
                 })
+                .catch(() => {
+                    setNewName('')
+                    setNewNumber('')
+                    setErrorMessage(`${newName} has allready been removed`)
+                    setTimeout(() => {
+                        setErrorMessage(null)
+                    }, 5000)
+                    setPersons(persons.filter(p => p.name !== newName))
+                })
         }
     }
-
 
 
     const removePerson = (id) => {
 
         const person = persons.find(p => p.id === id)
-        window.confirm(`Delete ${person.name}?`)
+        const deleteConfiramtion = window.confirm(`Delete ${person.name}?`)
         setSearchName('')
-
-        personService
-            .remove(id)
-            .then(
-                setPersons(persons.filter(p => p.id !== id)),
-                setMessage(`${person.name} is gone now`),
-                setTimeout(() => {
-                    setMessage(null)
-                }, 5000)
-                // laukums filtra inputā nenotīrās, JO es to neizdzēšu! un vēl tur ir daudz nepilnību, 
-            )
+        if (deleteConfiramtion) {
+            personService
+                .remove(id)
+                .then(() => {
+                    setPersons(persons.filter(p => p.id !== id))
+                    setMessage(`${person.name} is gone now`)
+                    setTimeout(() => {
+                        setMessage(null)
+                    }, 5000)
+                })
+        }
     }
+
 
     const personsToShow = showAll
         ? persons
@@ -139,8 +144,6 @@ const App = () => {
     const handleSearchName = (e) => {
         setSearchName(e.target.value)
         setShowAll(false)
-
-        // laukums filtra inputā nenotīrās, JO es to neizdzēšu!
     }
 
 

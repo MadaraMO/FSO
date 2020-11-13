@@ -59,6 +59,7 @@ const App = () => {
         if (persons.some(person => person.name === newName)) {
             const updateNumber = window.confirm(`${newName} is already in phonebook. Replace numbers?`)
 
+
             if (updateNumber) {
                 const updatedPerson = { ...person, number: newNumber }
                 personService
@@ -76,6 +77,7 @@ const App = () => {
                         setNewNumber('')
                         setErrorMessage(`${error.response.data.error}`)
                         // setErrorMessage(`${newName} has allready been removed`)
+
                         setTimeout(() => {
                             setErrorMessage(null)
                         }, 5000)

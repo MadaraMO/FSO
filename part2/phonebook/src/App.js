@@ -38,9 +38,14 @@ const App = () => {
     useEffect(() => {
         personService
             .getAll()
-            // https://javascript.info/promise-chaining
             .then(initialData => {
                 setPersons(initialData)
+            })
+            .catch(error => {
+                setErrorMessage(`${error.response.data.error}`)
+                setTimeout(() => {
+                    setErrorMessage(null)
+                }, 5000)
             })
     }, [])
 
@@ -54,17 +59,17 @@ const App = () => {
             number: newNumber
         }
 
-        const person = persons.find(p => p.name === newName)
-
-        if (persons.some(person => person.name === newName)) {
+        const registeredPerson = persons.find(p => p.name === newName)
+        // persons.some(person => person.name === newName)
+        if (registeredPerson) {
             const updateNumber = window.confirm(`${newName} is already in phonebook. Replace numbers?`)
 
             if (updateNumber) {
-                const updatedPerson = { ...person, number: newNumber }
+                const newPerson = { ...registeredPerson, number: newNumber }
                 personService
-                    .update(updatedPerson.id, updatedPerson)
-                    .then(() => {
-                        setPersons(persons.map(p => p.id !== updatedPerson.id ? p : updatedPerson))
+                    .update(newPerson.id, registeredPerson)
+                    .then((updatedPerson) => {
+                        setPersons(persons.map(p => p.id !== registeredPerson.id ? p : updatedPerson))
                         setNewName('')
                         setNewNumber('')
                         setMessage(`${newName}'s number is replaced`)
@@ -74,9 +79,8 @@ const App = () => {
                     }).catch((error) => {
                         setNewName('')
                         setNewNumber('')
-                        setErrorMessage(`${error.response.data.error}`)
-                        // setErrorMessage(`${newName} has allready been removed`)
-                        console.log(setErrorMessage())
+                        // setErrorMessage(`${error.response.data.error}`)
+                        setErrorMessage(`${newName} has allready been removed`)
                         setTimeout(() => {
                             setErrorMessage(null)
                         }, 5000)

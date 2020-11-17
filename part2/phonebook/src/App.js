@@ -41,12 +41,12 @@ const App = () => {
             .then(initialData => {
                 setPersons(initialData)
             })
-            // .catch(error => {
-            //     setErrorMessage(`${error.response.data.error}`)
-            //     setTimeout(() => {
-            //         setErrorMessage(null)
-            //     }, 5000)
-            // })
+        // .catch(error => {
+        //     setErrorMessage(`${error.response.data.error}`)
+        //     setTimeout(() => {
+        //         setErrorMessage(null)
+        //     }, 5000)
+        // })
     }, [])
 
 
@@ -59,15 +59,17 @@ const App = () => {
             number: newNumber
         }
 
-        const registeredPerson = persons.find(p => p.name === newName)
+        const registeredPerson = persons.some(person => person.name === newName)
+        // persons.find(p => p.name === newName)
         // persons.some(person => person.name === newName)
         if (registeredPerson) {
             const updateNumber = window.confirm(`${newName} is already in phonebook. Replace numbers?`)
 
             if (updateNumber) {
+                // const person = persons.find(p => p.name === newName)
                 const newPerson = { ...registeredPerson, number: newNumber }
                 personService
-                    .update(newPerson.id, registeredPerson)
+                    .update(registeredPerson.id, newPerson)
                     .then((updatedPerson) => {
                         setPersons(persons.map(p => p.id !== registeredPerson.id ? p : updatedPerson))
                         setNewName('')
@@ -85,7 +87,7 @@ const App = () => {
                             setErrorMessage(null)
                         }, 5000)
                         setPersons(persons.filter(p => p.name !== newName))
-                        // console.log(error.response.data)
+                        console.log(error.response.data)
                     })
             }
         } else {

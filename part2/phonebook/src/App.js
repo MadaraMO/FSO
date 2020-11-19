@@ -38,10 +38,15 @@ const App = () => {
     useEffect(() => {
         personService
             .getAll()
-            // https://javascript.info/promise-chaining
             .then(initialData => {
                 setPersons(initialData)
             })
+        // .catch(error => {
+        //     setErrorMessage(`${error.response.data.error}`)
+        //     setTimeout(() => {
+        //         setErrorMessage(null)
+        //     }, 5000)
+        // })
     }, [])
 
 
@@ -49,41 +54,47 @@ const App = () => {
     const addContact = (e) => {
         e.preventDefault()
 
-        const newObject = {
+        const newPerson = {
             name: newName,
             number: newNumber
         }
 
-        const person = persons.find(p => p.name === newName)
-        
-        if (persons.some(person => person.name === newName)) {
+        const registeredPerson = persons.some(p => p.name === newName)
+
+        if (registeredPerson) {
+
+            const person = persons.find(p => p.name === newName)
+            const newPerson = { ...person, number: newNumber }
             const updateNumber = window.confirm(`${newName} is already in phonebook. Replace numbers?`)
-            
+
             if (updateNumber) {
-                const updatedPerson = { ...person, number: newNumber }
+
                 personService
-                    .update(updatedPerson.id, updatedPerson)
-                    .then(() => {
-                        setPersons(persons.map(p => p.id !== updatedPerson.id ? p : updatedPerson))
+                    .update(person.id, newPerson)
+                    .then((updatedPerson) => {
+                        setPersons(persons.map(p => p.id !== person.id ? p : updatedPerson))
                         setNewName('')
                         setNewNumber('')
                         setMessage(`${newName}'s number is replaced`)
                         setTimeout(() => {
                             setMessage(null)
                         }, 5000)
-                    }).catch(() => {
+                    }).catch((error) => {
+                        console.log(error)
                         setNewName('')
                         setNewNumber('')
+                        // setErrorMessage(`${error.response.data.error}`)
                         setErrorMessage(`${newName} has allready been removed`)
                         setTimeout(() => {
                             setErrorMessage(null)
                         }, 5000)
                         setPersons(persons.filter(p => p.name !== newName))
+                        // console.log(error.response.data)
                     })
             }
         } else {
             personService
-                .create(newObject)
+                .create(newPerson)
                 .then(returnedPerson => {
                     setPersons(persons.concat(returnedPerson))
                     setNewName('')
@@ -93,10 +104,10 @@ const App = () => {
                         setMessage(null)
                     }, 5000)
                 })
-                .catch(() => {
+                .catch((error) => {
                     setNewName('')
                     setNewNumber('')
-                    setErrorMessage(`${newName} has allready been removed`)
+                    setErrorMessage(`${error.response.data.error}`)
                     setTimeout(() => {
                         setErrorMessage(null)
                     }, 5000)
@@ -104,8 +115,6 @@ const App = () => {
                 })
         }
     }
-
-
 
 
     const removePerson = (id) => {

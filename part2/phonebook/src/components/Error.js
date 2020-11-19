@@ -1,8 +1,7 @@
-
 import React from 'react'
 
 const Error = ({ message }) => {
-    const errorStyle = {
+    const errorStyle= {
         color: 'rgb(175, 7, 147)',
         background: 'rgb(240, 238, 238)',
         fontSize: 15,

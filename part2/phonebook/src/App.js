@@ -80,6 +80,7 @@ const App = () => {
                             setMessage(null)
                         }, 5000)
                     }).catch((error) => {
+                        console.log(error)
                         setNewName('')
                         setNewNumber('')
                         // setErrorMessage(`${error.response.data.error}`)
@@ -88,7 +89,7 @@ const App = () => {
                             setErrorMessage(null)
                         }, 5000)
                         setPersons(persons.filter(p => p.name !== newName))
-                        console.log(error.response.data)
+                        // console.log(error.response.data)
                     })
             }
         } else {

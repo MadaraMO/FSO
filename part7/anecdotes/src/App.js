@@ -1,109 +1,19 @@
 import React, { useState } from 'react'
 import {
   BrowserRouter as Router,
-  Switch, Route, Link,
-  useParams,
+  Switch, Route
+  // useParams,
+  // useRouteMatch
 } from 'react-router-dom'
+import Menu from './components/Menu'
+import AnecdoteList from './components/AnecdoteList'
+import Anecdote from './components/Anecdote'
+import About from './components/About'
+import CreateNew from './components/CreateNew'
+import Footer from './components/Footer'
 
-// const Menu = () => {
-//   // const padding = {
-//   //   paddingRight: 5
-//   // }
-//   return (
-//     <div>
-//       things
-//     </div>
-//   )
-// }
-
-const AnecdoteList = ({ anecdotes }) => (
-  <div>
-    <h2>Anecdotes</h2>
-    <ul>
-      {anecdotes.map(anecdote =>
-        <li key={anecdote.id} >
-          <Link to={`/anecdotes/${anecdote.id}`}>{anecdote.content}</Link>
-        </li>
-      )}
-    </ul>
-  </div>
-)
-
-const Anecdote = ({ anecdotes }) => {
-  const id = useParams().id
-  const anecdote = anecdotes.find(anecdote => anecdote.id === id)
-  return (
-    <p>{anecdote.content}</p>
-  )
-}
-
-const About = () => (
-  <div>
-    <h2>About anecdote app</h2>
-    <p>According to Wikipedia:</p>
-
-    <em>An anecdote is a brief, revealing account of an individual person or an incident.
-      Occasionally humorous, anecdotes differ from jokes because their primary purpose is not simply to provoke laughter but to reveal a truth more general than the brief tale itself,
-      such as to characterize a person by delineating a specific quirk or trait, to communicate an abstract idea about a person, place, or thing through the concrete details of a short narrative.
-      An anecdote is "a story with a point."</em>
-
-    <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
-  </div>
-)
-
-const Footer = () => (
-  <div>
-    Anecdote app for <a href='https://courses.helsinki.fi/fi/tkt21009'>Full Stack -websovelluskehitys</a>.
-
-    See <a href='https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js'>https://github.com/fullstack-hy2019/routed-anecdotes/blob/master/src/App.js</a> for the source code.
-  </div>
-)
-
-const CreateNew = (props) => {
-  const [content, setContent] = useState('')
-  const [author, setAuthor] = useState('')
-  const [info, setInfo] = useState('')
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    props.addNew({
-      content,
-      author,
-      info,
-      votes: 0
-    })
-  }
-
-  return (
-    <div>
-      <h2>create a new anecdote</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          content
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
-        </div>
-        <div>
-          author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
-        </div>
-        <div>
-          url for more info
-          <input name='info' value={info} onChange={(e) => setInfo(e.target.value)} />
-        </div>
-        <button>create</button>
-      </form>
-    </div>
-  )
-
-}
 
 const App = () => {
-
-  const padding = {
-    paddingRight: 5
-  }
-
   const [anecdotes, setAnecdotes] = useState([
     {
       content: 'If it hurts, do it more often',
@@ -120,52 +30,37 @@ const App = () => {
       id: '2'
     }
   ])
-
-  // const [notification, setNotification] = useState('')
+  const [notification, setNotification] = useState('')
 
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
+    setNotification(`a new anecdote ${anecdote.content} created!`)
+    setTimeout(() => setNotification(''), 10000)
   }
 
-  // const anecdoteById = (id) =>
-  //   anecdotes.find(a => a.id === id)
 
-  // const vote = (id) => {
-  //   const anecdote = anecdoteById(id)
+// AR useRouteMatch MAN NESANĀCA, TĀPĒC NOŠPIKOJU
 
-  //   const voted = {
-  //     ...anecdote,
-  //     votes: anecdote.votes + 1
-  //   }
+  // const match = useRouteMatch()
+  // const anecdote = match
+  //   ? anecdotes.find(anecdote => anecdote.id === match.params.id)
+  //   : null
 
-  //   setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
-  // }
 
   return (
     <div>
       <h1>Software anecdotes</h1>
       <Router>
-        <div>
-          <Link style={padding} to='/'>Anecdotes</Link>
-          <Link style={padding} to='/about'>About</Link>
-          <Link style={padding} to='/create'>Create</Link>
-        </div>
+        <Menu />
+        <p>{notification}</p>
         <Switch>
-          <Route path='/about' >
-            <About />
-          </Route>
-          <Route path='/create' >
-            <CreateNew addNew={addNew} />
-          </Route >
-          <Route path='/anecdotes/:id' >
-            <Anecdote anecdotes={anecdotes} />
-          </Route>
-          <Route path='/' >
-            <AnecdoteList anecdotes={anecdotes} />
-          </Route>
+          <Route path="/" exact render={() => <AnecdoteList anecdotes={anecdotes} />} />
+          <Route path="/anecdotes/:id" render={({ match }) => <Anecdote match={match} anecdotes={anecdotes} />} />
+          <Route path="/create" render={({ history }) => <CreateNew history={history} addNew={addNew} />} />
+          <Route path="/about" render={() => <About />} />
         </Switch>
-      </Router >
+      </Router>
       <Footer />
     </div >
   )

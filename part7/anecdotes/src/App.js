@@ -13,6 +13,7 @@ import CreateNew from './components/CreateNew'
 import Footer from './components/Footer'
 
 
+
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
     {
@@ -30,11 +31,11 @@ const App = () => {
       id: '2'
     }
   ])
-  
+
   const [notification, setNotification] = useState('')
   const match = useRouteMatch('/anecdotes/:id')
   const history = useHistory()
-
+  
  
   const anecdote = match
     ? anecdotes.find(a => a.id === match.params.id)

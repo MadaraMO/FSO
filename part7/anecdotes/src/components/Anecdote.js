@@ -1,11 +1,10 @@
 
 import React from 'react';
 
-const Anecdote = ({ match, anecdotes }) => {
-    // WHAT IS THIS, DIDN'T RECOGNIZE PARAMS
-    const id = match.params.id
-    const anecdote = anecdotes.find(anecdote => anecdote.id === id)
-
+const Anecdote = ({  anecdote }) => {
+ 
+    // const id = match.params.id
+    // const anecdote = anecdotes.find(anecdote => anecdote.id === id)
 
     return (
         <div>

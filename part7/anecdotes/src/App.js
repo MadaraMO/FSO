@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import {
-  BrowserRouter as Router,
-  Switch, Route
+  Switch, Route, useRouteMatch
   // useParams,
-  // useRouteMatch
 } from 'react-router-dom'
 import Menu from './components/Menu'
 import AnecdoteList from './components/AnecdoteList'
@@ -38,29 +36,29 @@ const App = () => {
     setNotification(`a new anecdote ${anecdote.content} created!`)
     setTimeout(() => setNotification(''), 10000)
   }
-
-
-// AR useRouteMatch MAN NESANĀCA, TĀPĒC NOŠPIKOJU
-
-  // const match = useRouteMatch()
-  // const anecdote = match
-  //   ? anecdotes.find(anecdote => anecdote.id === match.params.id)
-  //   : null
-
+  
+  // useRoute...
+  const match = useRouteMatch('/anecdotes/:id')
+  const anecdote = match
+    ? anecdotes.find(a => a.id === match.params.id)
+    : null
 
   return (
     <div>
       <h1>Software anecdotes</h1>
-      <Router>
-        <Menu />
-        <p>{notification}</p>
-        <Switch>
-          <Route path="/" exact render={() => <AnecdoteList anecdotes={anecdotes} />} />
-          <Route path="/anecdotes/:id" render={({ match }) => <Anecdote match={match} anecdotes={anecdotes} />} />
-          <Route path="/create" render={({ history }) => <CreateNew history={history} addNew={addNew} />} />
-          <Route path="/about" render={() => <About />} />
-        </Switch>
-      </Router>
+      <Menu />
+      <p>{notification}</p>
+      <Switch>
+        <Route path="/" >
+          <AnecdoteList anecdotes={anecdotes} />
+          </Route> 
+        <Route path="/anecdotes/:id" >
+          <Anecdote anecdote={anecdote} />
+        </Route>
+        {/* useHist */}
+        <Route path="/create" render={({ history }) => <CreateNew history={history} addNew={addNew} />} />
+        <Route path="/about" render={() => <About />} />
+      </Switch>
       <Footer />
     </div >
   )

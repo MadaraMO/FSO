@@ -15,7 +15,6 @@ const CreateNew = ({ addNew, history }) => {
             votes: 0
         })
     
-        // I DONT GET IT
         history.push('/')
     }
 

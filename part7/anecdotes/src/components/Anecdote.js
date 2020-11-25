@@ -2,9 +2,6 @@
 import React from 'react';
 
 const Anecdote = ({  anecdote }) => {
- 
-    // const id = match.params.id
-    // const anecdote = anecdotes.find(anecdote => anecdote.id === id)
 
     return (
         <div>

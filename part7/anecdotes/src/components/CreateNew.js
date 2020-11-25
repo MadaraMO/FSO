@@ -1,7 +1,9 @@
 import { useField } from '../hooks'
+import { useRef } from 'react'
 
 const CreateNew = ({ addNew, history }) => {
-
+    // const [inputValue, setInputValue] = useState('')
+    const input = useRef()
     const content = useField('name')
     const author = useField('author')
     const info = useField('info')
@@ -19,35 +21,47 @@ const CreateNew = ({ addNew, history }) => {
         history.push('/')
     }
 
+    const handleReset = (e) => {
+        input.current.value = ''
+
+    }
+
     return (
         <div>
             <h2>create a new anecdote</h2>
-            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={handleSubmit}> */}
+            <form >
                 <div>
                     content
-          <input {...content}
-                    // name={content.name}
-                    // value={content.value}
-                    // onChange={content.onChange}
+          <input
+                        //   {...content}
+                        name={content.name}
+                        value={content.value}
+                        onChange={content.onChange}
                     />
                 </div>
                 <div>
                     author
-          <input  {...author}
-                    // name={author.name}
-                    // value={author.value}
-                    // onChange={author.onChange} 
+          <input
+                        //   {...author}
+                        name={author.name}
+                        value={author.value}
+                        onChange={author.onChange}
+                        ref={input}
                     />
                 </div>
                 <div>
                     url for more info
-          <input {...info}
-                    // name={info.name}
-                    // value={info.value}
-                    // onChange={info.onChange} 
+          <input
+                        //   {...info}
+                        name={info.name}
+                        value={info.value}
+                        onChange={info.onChange}
+                        ref={input}
                     />
                 </div>
-                <button>create</button>
+                <button onClick={handleSubmit}>create</button>
+                <button onClick={handleReset}>reset</button>
             </form>
         </div>
     )

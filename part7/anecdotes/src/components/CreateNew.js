@@ -1,14 +1,13 @@
 import { useField } from '../hooks'
-import { useRef } from 'react'
+// import { useRef } from 'react'
 
 const CreateNew = ({ addNew, history }) => {
-    // const [inputValue, setInputValue] = useState('')
-    const input = useRef()
+    // const input = useRef()
     const content = useField('name')
     const author = useField('author')
     const info = useField('info')
 
-    // par šo bija problēmas iedomāties
+
     const handleSubmit = (e) => {
         e.preventDefault()
         addNew({
@@ -21,15 +20,14 @@ const CreateNew = ({ addNew, history }) => {
         history.push('/')
     }
 
-    const handleReset = (e) => {
-        input.current.value = ''
-
+    // Tikpat labi var arī atstāt tukšu. pieļauju, ka nevajadzētu, bet, hei, man strādā. kāpēc?
+    const handleReset = () => {
     }
 
     return (
         <div>
             <h2>create a new anecdote</h2>
-            {/* <form onSubmit={handleSubmit}> */}
+            {/* <form onSubmit={handleSubmit}> ar enter tāpat aiziet */}
             <form >
                 <div>
                     content
@@ -38,6 +36,8 @@ const CreateNew = ({ addNew, history }) => {
                         name={content.name}
                         value={content.value}
                         onChange={content.onChange}
+                        onReset={content.onReset}
+                    // ref={input}
                     />
                 </div>
                 <div>
@@ -47,7 +47,8 @@ const CreateNew = ({ addNew, history }) => {
                         name={author.name}
                         value={author.value}
                         onChange={author.onChange}
-                        ref={input}
+                        onReset={author.onReset}
+                    // ref={input}
                     />
                 </div>
                 <div>
@@ -57,7 +58,8 @@ const CreateNew = ({ addNew, history }) => {
                         name={info.name}
                         value={info.value}
                         onChange={info.onChange}
-                        ref={input}
+                        onReset={info.onReset}
+                    // ref={input}
                     />
                 </div>
                 <button onClick={handleSubmit}>create</button>

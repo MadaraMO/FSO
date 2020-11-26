@@ -35,8 +35,8 @@ const App = () => {
   const [notification, setNotification] = useState('')
   const match = useRouteMatch('/anecdotes/:id')
   const history = useHistory()
-  
- 
+
+
   const anecdote = match
     ? anecdotes.find(a => a.id === match.params.id)
     : null

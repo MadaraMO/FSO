@@ -1,7 +1,9 @@
 import { useField } from '../hooks'
+import { useHistory } from 'react-router-dom'
 
-const CreateNew = ({ addNew, history }) => {
-     // spread the joy, somehow 
+const CreateNew = ({ addNew }) => {
+    const history = useHistory()
+    // spread the joy, somehow 
     const content = useField('text')
     const author = useField('text')
     const info = useField('text')
@@ -14,7 +16,6 @@ const CreateNew = ({ addNew, history }) => {
             info: info.value,
             votes: 0
         })
-        // par history vēl
         history.push('/')
     }
 
@@ -35,13 +36,13 @@ const CreateNew = ({ addNew, history }) => {
                 </div>
                 <div>
                     author
-          <input {...author}  />
+          <input {...author} />
                 </div>
                 <div>
                     url for more info
-          <input {...info}  />
+          <input {...info} />
                 </div>
-                <button >create</button>
+                <button>create</button>
                 <button type='reset' onClick={reset}>reset</button>
             </form>
         </div >

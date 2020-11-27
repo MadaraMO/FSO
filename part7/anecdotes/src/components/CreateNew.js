@@ -3,17 +3,16 @@ import { useHistory } from 'react-router-dom'
 
 const CreateNew = ({ addNew }) => {
     const history = useHistory()
-    // spread the joy, somehow 
-    const content = useField('text')
-    const author = useField('text')
-    const info = useField('text')
+    const [content, resetContent] = useField('text')
+    const [author, resetAuthor] = useField('text')
+    const [info, resetInfo] = useField('text')
 
     const handleSubmit = (e) => {
         e.preventDefault()
         addNew({
-            content: content.input.value,
-            author: author.input.value,
-            info: info.input.value,
+            content: content.value,
+            author: author.value,
+            info: info.value,
             votes: 0
         })
         history.push('/')
@@ -21,10 +20,12 @@ const CreateNew = ({ addNew }) => {
 
     const resetAll = (e) => {
         e.preventDefault()
-        content.resetValue()
-        author.resetValue()
-        info.resetValue()
+        resetContent()
+        resetAuthor()
+        resetInfo()
+
     }
+
 
     return (
         <div>
@@ -32,18 +33,18 @@ const CreateNew = ({ addNew }) => {
             <form onSubmit={handleSubmit}>
                 <div>
                     content
-          <input {...content.input} />
+          <input {...content} />
                 </div>
                 <div>
                     author
-          <input {...author.input} />
+          <input {...author} />
                 </div>
                 <div>
                     url for more info
-          <input {...info.input} />
+          <input {...info} />
                 </div>
                 <button>create</button>
-                <button type='reset' onClick={resetAll} >reset</button>
+                <button type='reset' onClick={resetAll}>reset</button>
             </form>
         </div >
     )

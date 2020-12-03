@@ -1,15 +1,27 @@
 
 import React from 'react';
 
-const Anecdote = ({  anecdote }) => {
+import styled from '@emotion/styled'
+import { css } from '@styled-system/css'
+import Section from '../design/section'
+
+const Joke = styled('div')(
+    css({
+        bg: 'Aquamarine',
+        color: 'orchid'
+    })
+)
+
+const Anecdote = ({ anecdote }) => {
 
     return (
-        <div>
-            <h5> Author: {anecdote.author} </h5>
-            <p>{anecdote.content}</p>
+        <Section type='column' align='center'>
+
+            <h2> Author: {anecdote.author} </h2>
+            <Joke>{anecdote.content}</Joke>
             <p>has {anecdote.votes} votes</p>
             <p>Info: <a href={anecdote.info}>{anecdote.info}</a></p>
-        </div>
+        </Section>
     )
 }
 

@@ -1,6 +1,69 @@
 import { useField } from '../hooks'
 import { useHistory } from 'react-router-dom'
 
+import styled from '@emotion/styled'
+import css from '@styled-system/css'
+import Space from '../design/space'
+import Section from '../design/section'
+
+const Form = styled('form')(
+    css({
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'stretch',
+    })
+)
+
+const Label = styled('div')(
+    css({
+        display: 'flex',
+        color: 'dark grey',
+        bg: 'LightGray',
+        p: 1,
+        border: '2px solid transparent',
+        borderColor: 'litght grey',
+        borderRadius: 8,
+        '&: hover': {
+            bg: 'orchid',
+        }
+    })
+)
+
+const Input = styled('input')(
+    css({
+        color: 'dark grey',
+        bg: 'Gainsboro',
+        width: '100%',
+        alignItems: 'stretch',
+        border: '1px solid transparent',
+        borderColor: 'litght grey',
+        borderRadius: 6,
+        '&: hover': {
+            bg: 'LightGray',
+        },
+        '&foucus': {
+            outline: 'none',
+        },
+    })
+)
+
+const Button = styled('button')(
+    ({ bg }) => css({
+        color: 'ligth grey',
+        py: 1,
+        px: 5,
+        bg: bg,
+        border: '1px solid transparent',
+        borderRadius: 8,
+        boxShadow: '0 2px 4px rgba(0, 0, 0, .125)',
+        '&: hover': {
+            bg: 'teal',
+        }
+    })
+)
+
+
 const CreateNew = ({ addNew }) => {
     const history = useHistory()
     const [content, resetContent] = useField('text')
@@ -23,30 +86,27 @@ const CreateNew = ({ addNew }) => {
         resetContent()
         resetAuthor()
         resetInfo()
-
     }
 
 
     return (
-        <div>
+        <Section type='column' align='center'>
             <h2>create a new anecdote</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    content
-          <input {...content} />
-                </div>
-                <div>
-                    author
-          <input {...author} />
-                </div>
-                <div>
-                    url for more info
-          <input {...info} />
-                </div>
-                <button>create</button>
-                <button type='reset' onClick={resetAll}>reset</button>
-            </form>
-        </div >
+            <Form onSubmit={handleSubmit}>
+                <Label for='content'>content: <Input {...content} /></Label>
+                <Space padding={2} />
+                <Label for='author'>author: <Input {...author} /></Label>
+                <Space padding={2} />
+                <Label for='info'> info:  <Input {...info} /></Label>
+                <Space padding={10} />
+                <Section justify='space-between'>
+                    <Button bg='Aquamarine'>create</Button>
+                    <Space px={3} />
+                    <Button bg='LightSlateGray' type='reset' onClick={resetAll}>reset</Button>
+                </Section>
+
+            </Form>
+        </Section >
     )
 }
 

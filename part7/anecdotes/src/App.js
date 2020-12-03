@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Switch, Route, useRouteMatch } from 'react-router-dom'
+
 import Menu from './components/Menu'
 import AnecdoteList from './components/AnecdoteList'
 import Anecdote from './components/Anecdote'
@@ -7,6 +8,29 @@ import About from './components/About'
 import CreateNew from './components/CreateNew'
 import Footer from './components/Footer'
 
+import styled from '@emotion/styled'
+import { css } from '@styled-system/css'
+import Layout from './design/layout'
+
+// Es nesaprotu, kā lai tiek vaļā no tā <body> margin 
+
+// const Box = styled.body({
+//   boxSizing: 'border-box',
+//   m: 0,
+//   minWidth: 0,
+// })
+
+
+const Title = styled.h1(
+  css({
+    fontSize: [4, 5, 6],
+    color: 'DimGrey',
+    py: 5,
+    display: 'flex',
+    justifyContent: 'center',
+    textTransform: 'uppercase',
+    boxShadow: '0 1px 4px rgba(0, 0, 0, .125)',
+  }))
 
 
 const App = () => {
@@ -42,9 +66,10 @@ const App = () => {
   }
 
   return (
-    <div>
-      <h1>Software anecdotes</h1>
+
+    <Layout >
       <Menu />
+      <Title>Software anecdotes</Title>
       <p>{notification}</p>
       <Switch>
         <Route exact path="/" >
@@ -61,7 +86,7 @@ const App = () => {
         </Route>
       </Switch>
       <Footer />
-    </div >
+    </Layout >
   )
 }
 

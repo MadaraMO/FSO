@@ -10,7 +10,7 @@ const Navigation = styled('div')(
         position: 'fixed',
         bg: '#2F2B2A',
         justifyContent: justify,
-        fontFamily: 'Helvetica',
+        fontFamily: 'helvetica',
         alignItems: 'center',
         minWidth: '100vw',
         height: '50px',
@@ -19,7 +19,7 @@ const Navigation = styled('div')(
             p: 2,
             textDecoration: 'none',
             textTransform: 'uppercase',
-            '&: hover': {
+            '&:hover': {
                 color: 'hotpink',
             }
         },

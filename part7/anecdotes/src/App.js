@@ -10,21 +10,13 @@ import Footer from './components/Footer'
 
 import styled from '@emotion/styled'
 import { css } from '@styled-system/css'
-import Layout from './design/layout'
-
-// Es nesaprotu, kā lai tiek vaļā no tā <body> margin 
-
-// const Box = styled.body({
-//   boxSizing: 'border-box',
-//   m: 0,
-//   minWidth: 0,
-// })
-
+import Layout from './design/Layout'
+import GlobalStyle from './GlobalStyle'
 
 const Title = styled.h1(
   css({
     fontSize: [4, 5, 6],
-    color: 'DimGrey',
+    color: 'dimGrey',
     py: 5,
     display: 'flex',
     justifyContent: 'center',
@@ -67,26 +59,29 @@ const App = () => {
 
   return (
 
-    <Layout >
-      <Menu />
-      <Title>Software anecdotes</Title>
-      <p>{notification}</p>
-      <Switch>
-        <Route exact path="/" >
-          <AnecdoteList anecdotes={anecdotes} />
-        </Route>
-        <Route path="/anecdotes/:id" >
-          <Anecdote anecdote={anecdote} />
-        </Route>
-        <Route path="/create" >
-          <CreateNew addNew={addNew} />
-        </Route>
-        <Route path="/about" >
-          <About />
-        </Route>
-      </Switch>
-      <Footer />
-    </Layout >
+    <GlobalStyle>
+      <Layout >
+        <Menu />
+        <Title>Software anecdotes</Title>
+        <p>{notification}</p>
+        <Switch>
+          <Route exact path="/" >
+            <AnecdoteList anecdotes={anecdotes} />
+          </Route>
+          <Route path="/anecdotes/:id" >
+            <Anecdote anecdote={anecdote} />
+          </Route>
+          <Route path="/create" >
+            <CreateNew addNew={addNew} />
+          </Route>
+          <Route path="/about" >
+            <About />
+          </Route>
+        </Switch>
+        <Footer />
+      </Layout >
+    </GlobalStyle>
+
   )
 }
 

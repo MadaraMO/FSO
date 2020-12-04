@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 
 import styled from '@emotion/styled'
 import { css } from '@styled-system/css'
-import Section from '../design/section'
+import Section from '../design/Section'
 
 const List = styled('div')(
     css({
         listStyleType: 'none',
     }))
-    
+
 
 const AnecdoteList = ({ anecdotes }) => {
 

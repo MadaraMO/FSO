@@ -3,8 +3,8 @@ import React from 'react'
 import styled from '@emotion/styled'
 import css from '@styled-system/css'
 
-import Space from '../design/space'
-import TextBlock from '../design/textblock'
+import Space from '../design/Space'
+import TextBlock from '../design/TextBlock'
 
 
 
@@ -13,9 +13,9 @@ const FooterBlock = styled('div')(
     display: 'flex',
     justifyContent: 'center',
     a: {
-      color: 'SteelBlue',
-      '&: hover': {
-        bg: 'Aquamarine',
+      color: 'steelBlue',
+      '&:hover': {
+        bg: 'aquamarine',
       },
       textDecoration: 'none',
       lineHeight: 1,

@@ -7,15 +7,15 @@ const Layout = styled('div')(
         flexDirection: 'column',
         m: 0,
         p: 0,
-        bg: 'GhostWhite',
-        fontFamily: 'Helvetica',
+        bg: 'ghostWhite',
+        fontFamily: 'helvetica',
         minHeight: '100vh',
         minWidth: '100vw',
         a: {
-            color: 'SteelBlue',
+            color: 'steelBlue',
             textDecoration: 'none',
-            '&: hover': {
-                bg: 'Aquamarine',
+            '&:hover': {
+                bg: 'aquamarine',
                 lineHeight: 0.2,
             }
         },

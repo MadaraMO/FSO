@@ -1,6 +1,6 @@
 import React from 'react'
-import Section from '../design/section'
-import TextBlock from '../design/textblock'
+import Section from '../design/Section'
+import TextBlock from '../design/TextBlock'
 
 
 const About = () => (

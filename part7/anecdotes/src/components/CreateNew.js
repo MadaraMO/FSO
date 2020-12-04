@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom'
 
 import styled from '@emotion/styled'
 import css from '@styled-system/css'
-import Space from '../design/space'
-import Section from '../design/section'
+import Space from '../design/Space'
+import Section from '../design/Section'
 
 const Form = styled('form')(
     css({
@@ -18,13 +18,13 @@ const Form = styled('form')(
 const Label = styled('div')(
     css({
         display: 'flex',
-        color: 'dark grey',
-        bg: 'LightGray',
+        color: 'darkGrey',
+        bg: 'lightGrey',
         p: 1,
         border: '2px solid transparent',
-        borderColor: 'litght grey',
+        borderColor: 'lightGrey',
         borderRadius: 8,
-        '&: hover': {
+        '&:hover': {
             bg: 'orchid',
         }
     })
@@ -32,17 +32,16 @@ const Label = styled('div')(
 
 const Input = styled('input')(
     css({
-        color: 'dark grey',
-        bg: 'Gainsboro',
+        color: 'darkGrey',
+        bg: 'gainsboro',
         width: '100%',
-        alignItems: 'stretch',
         border: '1px solid transparent',
-        borderColor: 'litght grey',
+        borderColor: 'lightGrey',
         borderRadius: 6,
-        '&: hover': {
-            bg: 'LightGray',
+        '&:hover': {
+            bg: 'lightGray',
         },
-        '&foucus': {
+        '&:focus': {
             outline: 'none',
         },
     })
@@ -50,7 +49,7 @@ const Input = styled('input')(
 
 const Button = styled('button')(
     ({ bg }) => css({
-        color: 'ligth grey',
+        color: 'ligthGrey',
         py: 1,
         px: 5,
         bg: bg,
@@ -93,11 +92,11 @@ const CreateNew = ({ addNew }) => {
         <Section type='column' align='center'>
             <h2>create a new anecdote</h2>
             <Form onSubmit={handleSubmit}>
-                <Label for='content'>content: <Input {...content} /></Label>
+                <Label>content: <Input {...content} /></Label>
                 <Space padding={2} />
-                <Label for='author'>author: <Input {...author} /></Label>
+                <Label >author: <Input {...author} /></Label>
                 <Space padding={2} />
-                <Label for='info'> info:  <Input {...info} /></Label>
+                <Label> info:  <Input {...info} /></Label>
                 <Space padding={10} />
                 <Section justify='space-between'>
                     <Button bg='Aquamarine'>create</Button>

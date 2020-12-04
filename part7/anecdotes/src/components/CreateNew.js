@@ -56,7 +56,7 @@ const Button = styled('button')(
         border: '1px solid transparent',
         borderRadius: 8,
         boxShadow: '0 2px 4px rgba(0, 0, 0, .125)',
-        '&: hover': {
+        '&:hover': {
             bg: 'teal',
         }
     })
@@ -99,9 +99,9 @@ const CreateNew = ({ addNew }) => {
                 <Label> info:  <Input {...info} /></Label>
                 <Space padding={10} />
                 <Section justify='space-between'>
-                    <Button bg='Aquamarine'>create</Button>
+                    <Button bg='aquamarine'>create</Button>
                     <Space px={3} />
-                    <Button bg='LightSlateGray' type='reset' onClick={resetAll}>reset</Button>
+                    <Button bg='lightSlateGray' type='reset' onClick={resetAll}>reset</Button>
                 </Section>
 
             </Form>

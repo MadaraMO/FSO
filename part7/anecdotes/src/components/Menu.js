@@ -30,6 +30,7 @@ const Navigation = styled('div')(
 const Menu = () => {
 
     return (
+        // šeit, piemēram, spaceAround neiet krastā
         <Navigation justify='space-around'>
             <Link to='/'>Anecdotes</Link>
             <Link to='/about'>About</Link>

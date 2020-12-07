@@ -9,7 +9,7 @@ const AnecdoteList = ({ anecdotes }) => {
     return (
         <Section type='column' align='center'>
             <h2>Anecdotes</h2>
-            
+
             <ol>
                 {anecdotes.map(anecdote =>
                     <li key={anecdote.id} >

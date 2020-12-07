@@ -10,7 +10,7 @@ const Navigation = styled('div')(
         position: 'fixed',
         bg: '#2F2B2A',
         justifyContent: justify,
-        fontFamily: 'helvetica',
+        fontFamily: 'Helvetica',
         alignItems: 'center',
         minWidth: '100vw',
         height: '50px',

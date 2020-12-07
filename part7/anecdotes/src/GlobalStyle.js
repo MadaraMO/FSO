@@ -1,7 +1,5 @@
 import { Global, css } from '@emotion/react'
 
-// ar styled arī var?
-
 export default function GlobalStyle({ children }) {
   return (
     <>

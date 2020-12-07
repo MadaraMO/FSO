@@ -17,7 +17,7 @@ import GlobalStyle from './GlobalStyle'
 const Title = styled.h1(
   css({
     fontSize: [4, 5, 6],
-    color: 'dimGrey',
+    color: 'dimgrey',
     py: 5,
     display: 'flex',
     justifyContent: 'center',

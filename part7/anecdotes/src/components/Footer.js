@@ -13,7 +13,7 @@ const FooterBlock = styled('div')(
     display: 'flex',
     justifyContent: 'center',
     a: {
-      color: 'steelBlue',
+      color: 'steelblue',
       '&:hover': {
         bg: 'aquamarine',
       },

@@ -15,14 +15,14 @@ const Form = styled('form')(
     })
 )
 
-const Label = styled('div')(
+const Label = styled('label')(
     css({
         display: 'flex',
-        color: 'darkGrey',
-        bg: 'lightGrey',
+        color: 'darkgrey',
+        bg: 'lightgrey',
         p: 1,
         border: '2px solid transparent',
-        borderColor: 'lightGrey',
+        borderColor: 'lightgrey',
         borderRadius: 8,
         '&:hover': {
             bg: 'orchid',
@@ -32,14 +32,14 @@ const Label = styled('div')(
 
 const Input = styled('input')(
     css({
-        color: 'darkGrey',
+        color: 'darkgrey',
         bg: 'gainsboro',
         width: '100%',
         border: '1px solid transparent',
-        borderColor: 'lightGrey',
+        borderColor: 'lightgrey',
         borderRadius: 6,
         '&:hover': {
-            bg: 'lightGray',
+            bg: 'lightgrey',
         },
         '&:focus': {
             outline: 'none',
@@ -49,7 +49,7 @@ const Input = styled('input')(
 
 const Button = styled('button')(
     ({ bg }) => css({
-        color: 'ligthGrey',
+        color: 'ligthgrey',
         py: 1,
         px: 5,
         bg: bg,
@@ -101,7 +101,7 @@ const CreateNew = ({ addNew }) => {
                 <Section justify='space-between'>
                     <Button bg='aquamarine'>create</Button>
                     <Space px={3} />
-                    <Button bg='lightSlateGray' type='reset' onClick={resetAll}>reset</Button>
+                    <Button bg='lightslategray' type='reset' onClick={resetAll}>reset</Button>
                 </Section>
 
             </Form>

@@ -1,18 +1,22 @@
-const calculateBmi = (height: number, weight: number) => {
+const calculateBmi = (height: number, weight: number): string => {
   const heightSquare = (height / 100) ** 2;
   const result = weight / heightSquare;
 
   if (result > 16 && result < 18.5) {
     return "Underweight";
-  } else if (result > 18.5 && result < 25) {
+  }
+  if (result > 18.5 && result < 25) {
     return "Normal";
-  } else if (result > 25 && result < 30) {
+  }
+  if (result > 25 && result < 30) {
     return "Overweight";
-  } else if (result >= 30) {
+  }
+  if (result >= 30) {
     return "Obese";
-  } else {
-    return "Error";
   }
 };
+// ....atkārtošu exerciseCalculator.ts parsēšanas shēmu
+const height = Number(process.argv[2]);
+const weight = Number(process.argv[3]);
 
-console.log(calculateBmi(180, 74));
+console.log(calculateBmi(height, weight));

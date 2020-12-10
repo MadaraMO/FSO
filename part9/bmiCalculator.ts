@@ -15,7 +15,6 @@ const calculateBmi = (height: number, weight: number): string => {
     return "Obese";
   }
 };
-// ....atkārtoju exerciseCalculator.ts parsēšanas shēmu
 
 const parseBmi = (args: string[]) => {
   if (args.length < 4) throw new Error("Not enough arguments");

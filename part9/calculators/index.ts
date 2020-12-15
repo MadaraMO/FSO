@@ -34,9 +34,9 @@ app.get("/bmi", (req, res) => {
 app.post("/exercises", (req, res) => {
   // neesmu pārliecināta
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { daily_exercises, target }: any = req.body;
+  const { daily_exercises, target } = req.body;
 
-//   neizdevās pielietot
+  //   neizdevās pielietot
   //   const bodyDailyExercises = Array<number>(daily_exercises);
 
   const bodyTarget = Number(target);

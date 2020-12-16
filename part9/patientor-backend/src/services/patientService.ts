@@ -1,10 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import patientData from "../../data/patients.json";
+import toNewPatientEntry from "../utils";
 import { Patient, newPatientEntry, NonSensitivePatientEntry } from "../types";
 
-const patients: Patient[] = patientData;
+const patients: Patient[] = patientData.map((obj) => {
+  const object = toNewPatientEntry(obj) as Patient;
+  object.id = obj.id;
+  return object;
+});
 
 const getPatients = (): Patient[] => {
   return patients;
@@ -35,4 +42,5 @@ export default {
   getPatients,
   getNonSensitiveEntries,
   addPatient,
+  patients,
 };

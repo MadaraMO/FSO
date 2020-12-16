@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import express = require("express");
 import cors = require("cors");
+import diagnoseRouter from "./routes/diagnoses";
 
 const app = express();
 
@@ -14,7 +15,10 @@ app.get("/api/ping", (_req, res) => {
   res.json("pong");
 });
 
+app.use("/api/diagnoses", diagnoseRouter);
+
 const PORT = 3001;
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

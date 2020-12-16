@@ -2,12 +2,23 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import patientData from "../../data/patients.json";
-import { Patient, NonSensitivePatientEntry } from "../types";
+import { Patient, newPatientEntry, NonSensitivePatientEntry } from "../types";
 
 const patients: Patient[] = patientData;
 
 const getPatients = (): Patient[] => {
   return patients;
+};
+
+// te man bija Patient[], tas īsti negāja cauri
+const addPatient = (patient: newPatientEntry): Patient => {
+  const newPatient = {
+    id: (patients.map((p) => p.id).length + 1).toString(),
+    ...patient,
+  };
+
+  patients.push(newPatient);
+  return newPatient;
 };
 
 const getNonSensitiveEntries = (): NonSensitivePatientEntry[] => {
@@ -23,4 +34,5 @@ const getNonSensitiveEntries = (): NonSensitivePatientEntry[] => {
 export default {
   getPatients,
   getNonSensitiveEntries,
+  addPatient,
 };

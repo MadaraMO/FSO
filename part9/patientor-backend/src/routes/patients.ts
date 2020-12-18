@@ -12,6 +12,12 @@ router.get("/", (_req, res) => {
   res.send(patientService.getNonSensitiveEntries());
 });
 
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  console.log("someone pationed-id here");
+  res.send(patientService.getPatientById(id));
+});
+
 router.post("/", (req, res) => {
   try {
     const newPatientEntry = toNewPatientEntry(req.body);

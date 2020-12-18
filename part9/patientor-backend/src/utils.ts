@@ -61,6 +61,7 @@ const toNewPatientEntry = (object: any): newPatientEntry => {
     occupation: parseOccupation(object.occupation),
     gender: parseGender(object.gender),
     ssn: parseSsn(object.ssn),
+    entries: [],
     // viss strādā, tikai ne ar šo.
     // Ar šo man uzreiz dev logā met "incorect or missing", un viss uzkaras
     // dateOfBirth: parseDate(object.date),

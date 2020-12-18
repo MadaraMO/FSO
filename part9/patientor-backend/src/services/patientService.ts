@@ -13,11 +13,15 @@ const patients: Patient[] = patientData.map((obj) => {
   return object;
 });
 
+
 const getPatients = (): Patient[] => {
   return patients;
 };
 
-// te man bija Patient[], tas īsti negāja cauri
+const getPatientById = (id: string): Patient | undefined => {
+  return patients.find((patient) => patient.id === id);
+};
+
 const addPatient = (patient: newPatientEntry): Patient => {
   const newPatient = {
     id: (patients.map((p) => p.id).length + 1).toString(),
@@ -29,13 +33,16 @@ const addPatient = (patient: newPatientEntry): Patient => {
 };
 
 const getNonSensitiveEntries = (): NonSensitivePatientEntry[] => {
-  return patients.map(({ id, name, occupation, gender, dateOfBirth }) => ({
-    id,
-    name,
-    occupation,
-    gender,
-    dateOfBirth,
-  }));
+  return patients.map(
+    ({ id, name, occupation, gender, dateOfBirth, entries }) => ({
+      id,
+      name,
+      occupation,
+      gender,
+      dateOfBirth,
+      entries,
+    })
+  );
 };
 
 export default {
@@ -43,4 +50,5 @@ export default {
   getNonSensitiveEntries,
   addPatient,
   patients,
+  getPatientById,
 };

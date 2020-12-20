@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { newPatientEntry, Gender } from "./types";
+import { newPatientEntry, Gender, Entry } from "./types";
 
 const isString = (text: any): text is string => {
   return typeof text === "string" || text instanceof String;
@@ -54,6 +54,10 @@ const parseSsn = (ssn: any): string => {
 //   }
 //   return date;
 // };
+const parseEntry = (entries: any): Entry[] => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return entries;
+};
 
 const toNewPatientEntry = (object: any): newPatientEntry => {
   const newPatient: newPatientEntry = {
@@ -61,7 +65,7 @@ const toNewPatientEntry = (object: any): newPatientEntry => {
     occupation: parseOccupation(object.occupation),
     gender: parseGender(object.gender),
     ssn: parseSsn(object.ssn),
-    entries: [],
+    entries: parseEntry(object.entries),
     // viss strādā, tikai ne ar šo.
     // Ar šo man uzreiz dev logā met "incorect or missing", un viss uzkaras
     // dateOfBirth: parseDate(object.date),

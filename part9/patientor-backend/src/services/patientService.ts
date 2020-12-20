@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import patientData from "../../data/patients.json";
+import patientData from "../../data/patients";
 import toNewPatientEntry from "../utils";
 import { Patient, newPatientEntry, NonSensitivePatientEntry } from "../types";
 
@@ -48,6 +48,5 @@ export default {
   getPatients,
   getNonSensitiveEntries,
   addPatient,
-  patients,
   getPatientById,
 };

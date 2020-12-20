@@ -13,7 +13,6 @@ const patients: Patient[] = patientData.map((obj) => {
   return object;
 });
 
-
 const getPatients = (): Patient[] => {
   return patients;
 };

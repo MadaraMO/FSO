@@ -17,7 +17,7 @@ app.get("/api/ping", (_req, res) => {
   res.json("pong");
 });
 
-app.use("/api/diagnoses", diagnoseRouter);
+app.use("/api/diagnosis", diagnoseRouter);
 app.use("/api/patients", patientRouter);
 app.use("/api/patients/:id", patientRouter);
 

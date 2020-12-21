@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { Patient } from "../types";
+import { Patient, Diagnosis } from "../types";
 
 import { Action } from "./reducer";
 
@@ -7,12 +7,24 @@ export type State = {
   patients: { [id: string]: Patient };
   // kad apjuku, sāku norakstīt no šīs vietas, tad pamazām sāku saprast un modificēt
   singlePatient: Patient | undefined;
+  diagnosis: { [code: string]: Diagnosis };
 };
 
 const initialState: State = {
   patients: {},
   singlePatient: undefined,
+  diagnosis: {},
 };
+
+//  diagnosis: { [id: string]: Patient };
+//   // kad apjuku, sāku norakstīt no šīs vietas, tad pamazām sāku saprast un modificēt
+//   singlePatient: Patient | undefined;
+// };
+
+// const initialState: State = {
+//   patients: {},
+//   singlePatient: undefined,
+// };
 
 export const StateContext = createContext<[State, React.Dispatch<Action>]>([
   initialState,

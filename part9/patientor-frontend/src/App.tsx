@@ -10,12 +10,12 @@ import { Button, Divider, Header, Container } from "semantic-ui-react";
 
 import { apiBaseUrl } from "./constants";
 import { useStateValue } from "./state";
-import { Patient } from "./types";
+import { Patient, Diagnosis } from "./types";
 
 import PatientListPage from "./PatientListPage";
 import PatientPage from "./PatientPage";
 
-import { setPatientList } from "./state/reducer";
+import { setPatientList, setDiagnosesList } from "./state/reducer";
 
 const App: React.FC = () => {
   const [, dispatch] = useStateValue();
@@ -34,6 +34,18 @@ const App: React.FC = () => {
     };
 
     fetchPatientList();
+
+    const fetchDiagnosesList = async () => {
+      try {
+        const { data: diagnosesListFromApi } = await axios.get<Diagnosis[]>(
+          `${apiBaseUrl}/diagnoses`
+        );
+        dispatch(setDiagnosesList(diagnosesListFromApi));
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchDiagnosesList();
   }, [dispatch]);
 
   // VISPĀR SĀKUMĀ ES GRIBĒJU FETCHOT SINGLEPATIENT DATA NO APP.TSX

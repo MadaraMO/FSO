@@ -49,6 +49,8 @@ const PatientPage: React.FC = () => {
     }
   };
 
+   const [{ diagnosis }] = useStateValue();
+
   return (
     <section>
       {/* Te bija iekritiens. Nebija view. Beigās jautājuma zīmi norakastīju. jo ienāk kā undefined */}
@@ -66,9 +68,9 @@ const PatientPage: React.FC = () => {
             {entry.date} {entry.description}
           </p>
 
-          {entry.diagnosisCodes?.map((code) => (
-            <ul key={entry.id}>
-              <li>{code}</li>
+          {entry.diagnosisCodes?.map((code, i) => (
+            <ul key={i}>
+<li>{code}: {diagnosis[code]?.name}</li>
             </ul>
           ))}
         </section>

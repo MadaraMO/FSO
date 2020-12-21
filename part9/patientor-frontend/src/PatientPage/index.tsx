@@ -10,6 +10,15 @@ import { setSinglePatient } from "../state/reducer";
 
 import { Icon } from "semantic-ui-react";
 
+// const Entries: React.FC = () => {
+//   return (
+//     <section>
+//       <p></p>
+//       <li>/li>
+//     </section>
+//   );
+// };
+
 const PatientPage: React.FC = () => {
   const [{ singlePatient }, dispatch] = useStateValue();
   const { id } = useParams<{ id: string }>();
@@ -48,6 +57,22 @@ const PatientPage: React.FC = () => {
       </h2>
       <h3>{singlePatient?.occupation}</h3>
       <p>{singlePatient?.ssn}</p>
+      <h3>Entries</h3>
+      {/* <Entries /> */}
+
+      {singlePatient?.entries.map((entry) => (
+        <section key={entry.id}>
+          <p>
+            {entry.date} {entry.description}
+          </p>
+
+          {entry.diagnosisCodes?.map((code) => (
+            <ul key={entry.id}>
+              <li>{code}</li>
+            </ul>
+          ))}
+        </section>
+      ))}
     </section>
   );
 };

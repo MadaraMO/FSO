@@ -2,33 +2,13 @@ import React from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import { Patient, Entry } from "../types";
+import { Patient } from "../types";
 import { apiBaseUrl } from "../constants";
 import { useStateValue } from "../state";
-
 import { setSinglePatient } from "../state/reducer";
+import Entries from "./";
 
 import { Icon } from "semantic-ui-react";
-
-const Entries: React.FC<{ entry: Entry }> = ({ entry }) => {
-  const [{ diagnosis }] = useStateValue();
-  // const [{ singlePatient }] = useStateValue();
-  return (
-    <section>
-      <p>
-        {entry.date} {entry.description}
-      </p>
-
-      {entry.diagnosisCodes?.map((code) => (
-        <ul key={code}>
-          <li>
-            {code}: {diagnosis[code]?.name}
-          </li>
-        </ul>
-      ))}
-    </section>
-  );
-};
 
 const PatientPage: React.FC = () => {
   const [{ singlePatient }, dispatch] = useStateValue();
@@ -69,10 +49,12 @@ const PatientPage: React.FC = () => {
       <h3>{singlePatient?.occupation}</h3>
       <p>{singlePatient?.ssn}</p>
       <h3>Entries</h3>
-      {/* <Entries entry={singlePatient?.entries} /> */}
-      {singlePatient?.entries.map((entry, i) => (
-        <Entries key={i} entry={entry} />
-      ))}
+      <Entries entry={singlePatient?.entries} />
+      {/* <Entries entry={entry} /> */}
+      {/* {singlePatient?.entries.map((entry) => (
+        // <Entries key={entry.id} />
+        <Entries key={entry.id} entry={entry} /> */}
+      {/* ))} */}
     </section>
   );
 };

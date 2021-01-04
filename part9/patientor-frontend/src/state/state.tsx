@@ -16,16 +16,6 @@ const initialState: State = {
   diagnosis: {},
 };
 
-//  diagnosis: { [id: string]: Patient };
-//   // kad apjuku, sāku norakstīt no šīs vietas, tad pamazām sāku saprast un modificēt
-//   singlePatient: Patient | undefined;
-// };
-
-// const initialState: State = {
-//   patients: {},
-//   singlePatient: undefined,
-// };
-
 export const StateContext = createContext<[State, React.Dispatch<Action>]>([
   initialState,
   () => initialState,

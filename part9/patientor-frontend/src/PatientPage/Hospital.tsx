@@ -1,23 +1,29 @@
 import React from "react";
 import { HospitalEntry, Diagnosis } from "../types";
-// import DiagnosisList from "./";
+import DiagnosisList from "./";
 import { useStateValue } from "../state";
 
-const Hospital: React.FC<{ entry: HospitalEntry; code?: Array<Diagnosis["code"]> }> = ({
-  entry, code
-}) => {
+const Hospital: React.FC<{
+  entry: HospitalEntry;
+  // code?: Array<Diagnosis["code"]>;
+}> = ({ entry }) => {
   const [{ diagnosis }] = useStateValue();
   return (
     <section>
-      <p>
+      {/* <p>
         {entry.date} {entry.description} By: {entry.specialist}
-      </p>
+      </p> */}
       {/* <DiagnosisList key={entry.id} code={code} /> */}
-      <ul>
+      {/* <ul>
         {code?.map((code) => (
           <li key={code}>
             {code}: {diagnosis.name}
           </li>
+        ))}
+      </ul> */}
+      <ul>
+        {entry.diagnosisCodes?.map(() => (
+          <DiagnosisList key={entry.id} entry={entry} />
         ))}
       </ul>
       <p>Discharged on {entry.discharge?.date}</p>

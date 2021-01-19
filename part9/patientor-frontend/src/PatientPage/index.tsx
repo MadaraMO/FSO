@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import { Patient } from "../types";
+import { Patient, Entry } from "../types";
 import { apiBaseUrl } from "../constants";
 import { useStateValue } from "../state";
 import { setSinglePatient } from "../state/reducer";
@@ -10,7 +10,7 @@ import Entries from "./";
 
 import { Icon } from "semantic-ui-react";
 
-const PatientPage: React.FC = () => {
+const PatientPage: React.FC<{ entry: Entry }> = () => {
   const [{ singlePatient }, dispatch] = useStateValue();
   const { id } = useParams<{ id: string }>();
 
@@ -27,7 +27,7 @@ const PatientPage: React.FC = () => {
     };
 
     fetchSinglePatient();
-  }, [dispatch, id]);
+  }, [dispatch, id, singlePatient]);
 
   // baigi nečakarējos, pārkopēju, pielāgoju. gribēju izmēģināt ikonas:
   const IconByGender = () => {
@@ -49,12 +49,24 @@ const PatientPage: React.FC = () => {
       <h3>{singlePatient?.occupation}</h3>
       <p>{singlePatient?.ssn}</p>
       <h3>Entries</h3>
-      <Entries entry={singlePatient?.entries} />
-      {/* <Entries entry={entry} /> */}
+      {/* <Entries /> */}
+      {/* <Entries entry={singlePatient} /> */}
+
+      {singlePatient?.entries.map((entry: Entry) => (
+        // <Entries key={entry.id} />
+        <div key={entry.id}>
+          <p>
+            {entry.date} {entry.description} By: {entry.specialist}
+          </p>
+          <Entries entry={entry} />
+        </div>
+      ))}
+
+      {/* bez entry={entry} */}
       {/* {singlePatient?.entries.map((entry) => (
         // <Entries key={entry.id} />
-        <Entries key={entry.id} entry={entry} /> */}
-      {/* ))} */}
+        <Entries key={entry.id} />
+      ))} */}
     </section>
   );
 };

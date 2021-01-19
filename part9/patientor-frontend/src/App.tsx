@@ -18,7 +18,7 @@ import PatientPage from "./PatientPage";
 import { setPatientList, setDiagnosesList } from "./state/reducer";
 
 const App: React.FC = () => {
-  const [, dispatch] = useStateValue();
+  const [{ diagnosis }, dispatch] = useStateValue();
   React.useEffect(() => {
     axios.get<void>(`${apiBaseUrl}/ping`);
 
@@ -46,8 +46,9 @@ const App: React.FC = () => {
       }
     };
     fetchDiagnosesList();
-  }, [dispatch]);
+  }, [dispatch, diagnosis]);
 
+  
   // VISPĀR SĀKUMĀ ES GRIBĒJU FETCHOT SINGLEPATIENT DATA NO APP.TSX
 
   return (

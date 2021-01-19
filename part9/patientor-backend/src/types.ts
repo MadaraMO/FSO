@@ -17,8 +17,7 @@ export type NonSensitivePatientEntry = Omit<Patient, "ssn">;
 
 export type newPatientEntry = Omit<Patient, "id">;
 // nekur vēl neizmantoju
-export type PublicPatient = Omit<Patient, "ssn" | "entries">; 
-
+export type PublicPatient = Omit<Patient, "ssn" | "entries">;
 
 export interface DiagnoseEntry {
   code: string;
@@ -61,5 +60,3 @@ export type Entry =
   | HospitalEntry
   | OccupationalHealthcareEntry
   | HealthCheckEntry;
-
-
